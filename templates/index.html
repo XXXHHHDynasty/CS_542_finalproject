@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <body id=body_results> 
+    <ul>
+        {% for item in nav.top %}
+        <li id = "nav" class="{{ 'active' if item.is_active else '' }}">
+            <a href="{{ item.url }}">{{ item.label }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+<br>
+<head>
+    <script src="https://d3js.org/d3.v4.min.js"></script>  <!-- version of js-->
+    <script src="static/javascript/javascript.js" defer></script>  <!-- location of js file-->
+    <link rel="stylesheet" type="text/css" href="static/css/css.css">  <!-- location of css file-->
+
+    <title>WPI Discussion Board</title>
+</head>
+<h1>
+  WPI Discussion Board
+</h1>
+
+<form id="review">           
+      <label for="post">Write your post: </label>
+      <input type="text" id="post" name="post">
+      <div id="addError"></div>
+      <input type="submit" value="Post" class="button" id="review">
+
+  </form>
+
+</html>
