@@ -7,10 +7,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 const BaseRouter = () => (
     <BrowserRouter>
         <Routes>
-            <Route path="/" element={<App />}>
-                <Route path="/login" element={<Login />}></Route>
-            </Route>
+            <Route path="/" element={<App />}></Route>
             <Route path="/home" element={<Home />}></Route>
+            <Route path="/login" element={<Login />}></Route>
         </Routes>
     </BrowserRouter>
 )
