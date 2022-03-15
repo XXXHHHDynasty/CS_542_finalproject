@@ -7,6 +7,7 @@
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+  background-image: url('../../images/loginBG.jpeg');
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -24,6 +25,7 @@
   height: 65%;
   padding: 3%;
   background: rgb(185, 185, 185);
+  background-image: url('../../images/introBG.jpeg');
   border-radius: 12px;
 }
 

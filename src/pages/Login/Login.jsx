@@ -1,14 +1,16 @@
 import { useEffect } from 'react';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { Button, Checkbox, Form, Input, Select, message } from 'antd';
 import '/node_modules/antd/dist/antd.css';
 
-import illustration from '../../images/logo192.png';
+import illustration from '../../images/WPIlogo.jpeg';
 import passwordImg from '../../images/password.png';
 import usernameImg from '../../images/username.png';
 
 import './login.modules.css';
 
 const Login = () => {
+  const [form] = Form.useForm();
 
   const onFinish = (values) => {
     console.log('Success:', values);
@@ -17,6 +19,14 @@ const Login = () => {
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
+
+  const navigate = useNavigate()
+
+  const goHome = () => {
+    navigate('/home', {
+      state: { username: "testUsername" }
+    })
+  }
 
   return (
     <div className='login-wrap'>
@@ -54,9 +64,8 @@ const Login = () => {
                 },
               ]}
             >
-              <Input />
+              <Input placeholder='input username' />
             </Form.Item>
-
             <Form.Item
               label="Password"
               name="password"
@@ -67,7 +76,7 @@ const Login = () => {
                 },
               ]}
             >
-              <Input.Password />
+              <Input.Password placeholder='input password' />
             </Form.Item>
 
             <Form.Item
@@ -87,7 +96,7 @@ const Login = () => {
                 span: 16,
               }}
             >
-              <Button type="primary" htmlType="submit">
+              <Button onClick={goHome} type="primary" htmlType="submit">
                 Submit
               </Button>
             </Form.Item>
