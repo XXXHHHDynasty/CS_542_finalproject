@@ -12,6 +12,7 @@
 <br>
 <head>
     <script src="https://d3js.org/d3.v4.min.js"></script>  <!-- version of js-->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="static/javascript/javascript.js" defer></script>  <!-- location of js file-->
     <link rel="stylesheet" type="text/css" href="static/css/css.css">  <!-- location of css file-->
 
@@ -21,7 +22,10 @@
   WPI Discussion Board
 </h1>
 
-<form id="review">           
+<p id="demo"></p>
+
+<!-- <form action="/data" method = "post" id="review"> -->
+<form id="review">             
       <label for="post">Write your post: </label>
       <input type="text" id="post" name="post">
       <div id="addError"></div>
