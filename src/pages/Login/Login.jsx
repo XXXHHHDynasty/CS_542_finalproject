@@ -7,7 +7,7 @@ import illustration from '../../images/WPIlogo.jpeg';
 import passwordImg from '../../images/password.png';
 import usernameImg from '../../images/username.png';
 
-import './login.modules.css';
+import './login.css';
 
 const Login = () => {
   const [form] = Form.useForm();
