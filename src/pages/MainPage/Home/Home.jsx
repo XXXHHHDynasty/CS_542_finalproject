@@ -1,27 +1,38 @@
-import React from 'react'
-import { useLocation } from 'react-router-dom'
-import ReactDOM from 'react-dom';
+import React from 'react';
+import { useLocation } from 'react-router-dom';
 import 'antd/dist/antd.css';
 import './home.css';
-import { Layout, Menu } from 'antd';
-import {
-    AppstoreOutlined,
-    BarChartOutlined,
-    CloudOutlined,
-    ShopOutlined,
-    TeamOutlined,
-    UserOutlined,
-    UploadOutlined,
-    VideoCameraOutlined,
-} from '@ant-design/icons';
+import { Layout, Menu, Input, Button } from 'antd';
+import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
 
-const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
+const { Header, Footer, Content, Sider } = Layout;
+const { TextArea } = Input;
+class Demo extends React.Component {
+    state = {
+        value: '',
+    };
+
+    onChange = ({ target: { value } }) => {
+        this.setState({ value });
+    };
+
+    render() {
+        const { value } = this.state;
+
+        return (
+            <>
+                <TextArea placeholder="Autosize height based on content lines" autoSize />
+                <Button type="primary">Submit</Button>
+            </>
+        );
+    }
+}
 
 const Home = () => {
     return (
-        <Layout hasSider>
-            <Sider
+        <Layout>
+            <Sider width={200} className="site-layout-background"
                 style={{
                     overflow: 'auto',
                     height: '100vh',
@@ -29,10 +40,13 @@ const Home = () => {
                     left: 0,
                     top: 0,
                     bottom: 0,
-                }}
-            >
-                <div className="logo" />
-                <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
+                }}>
+                <Menu
+                    mode="inline"
+                    defaultSelectedKeys={['1']}
+                    defaultOpenKeys={['sub1']}
+                    style={{ height: '100%', borderRight: 0 }}
+                >
                     <SubMenu key="sub1" icon={<UserOutlined />} title="Server">
                         <Menu.Item key="1">Subserver 1</Menu.Item>
                         <Menu.Item key="2">Subserver 2</Menu.Item>
@@ -163,8 +177,9 @@ const Home = () => {
                         <br />
                         content
                     </div>
+                    <Demo />
                 </Content>
-                <Footer style={{ textAlign: 'center' }}>WPI Chat System ©2022 Created by CS 542 group</Footer>
+                <Footer style={{ textAlign: 'center' }}>WPI Chat System ©2022 Created by CS 542 Group</Footer>
             </Layout>
         </Layout>
     )

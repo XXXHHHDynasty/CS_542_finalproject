@@ -7,17 +7,13 @@ import illustration from '../../images/WPIlogo.jpeg';
 import passwordImg from '../../images/password.png';
 import usernameImg from '../../images/username.png';
 
-import './login.css';
+import './signup.css';
 
-const Login = () => {
+const Signup = () => {
   const navigate = useNavigate()
 
-  const goSignup = () => {
-    navigate('/signup', {})
-  }
-
-  const goHome = () => {
-    navigate('/home', {
+  const goLogin = () => {
+    navigate('/login', {
       state: { username: "testUsername" }
     })
   }
@@ -41,7 +37,7 @@ const Login = () => {
         <div className='form-wrap'>
           <div>
             <h1>WPI Chat System</h1>
-            <h3>Welcome to log in</h3>
+            <h3>Welcome to sign up</h3>
           </div>
           <Form
             name="basic"
@@ -70,6 +66,7 @@ const Login = () => {
             >
               <Input placeholder='input username' />
             </Form.Item>
+
             <Form.Item
               label="Password"
               name="password"
@@ -84,14 +81,16 @@ const Login = () => {
             </Form.Item>
 
             <Form.Item
-              name="remember"
-              valuePropName="checked"
-              wrapperCol={{
-                offset: 8,
-                span: 16,
-              }}
+              label="Password"
+              name="password"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please confirm your password!',
+                },
+              ]}
             >
-              <Checkbox>Remember me</Checkbox>
+              <Input.Password placeholder='confirm password' />
             </Form.Item>
 
             <Form.Item
@@ -100,25 +99,18 @@ const Login = () => {
                 span: 16,
               }}
             >
-              <Button onClick={goHome} type="primary" htmlType="submit">
-                Log In
+              <Button onClick={goLogin} type="primary" htmlType="submit">
+                Create Account
               </Button>
             </Form.Item>
           </Form>
-          {/* <div className='divider' /> */}
           <div>
-            Don't have an account?
+            Already have an account?
             <Button
               type="link"
-              onClick={goSignup}
+              onClick={goLogin}
             >
-              create a new account
-            </Button>
-            <Button
-              type="link"
-              onClick={goHome}
-            >
-              Enter as anonymous user
+              Log in
             </Button>
           </div>
         </div>
@@ -128,4 +120,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;
