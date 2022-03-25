@@ -2,12 +2,46 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import 'antd/dist/antd.css';
 import './home.css';
-import { Layout, Menu, Input, Button } from 'antd';
+import { Layout, Menu, Input, Button, Comment, Tooltip, List } from 'antd';
+import moment from 'moment';
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
 
 const { SubMenu } = Menu;
 const { Header, Footer, Content, Sider } = Layout;
 const { TextArea } = Input;
+
+const data = [
+    {
+        actions: [<span key="comment-list-reply-to-0">Reply to</span>],
+        author: 'User 1',
+        avatar: 'https://joeschmoe.io/api/v1/random',
+        content: (
+            <p>
+                Test post 1.
+            </p>
+        ),
+        datetime: (
+            <Tooltip title={moment().subtract(1, 'days').format('YYYY-MM-DD HH:mm:ss')}>
+                <span>{moment().subtract(1, 'days').fromNow()}</span>
+            </Tooltip>
+        ),
+    },
+    {
+        actions: [<span key="comment-list-reply-to-0">Reply to</span>],
+        author: 'User 1',
+        avatar: 'https://joeschmoe.io/api/v1/random',
+        content: (
+            <p>
+                Test post 2.
+            </p>
+        ),
+        datetime: (
+            <Tooltip title={moment().subtract(2, 'days').format('YYYY-MM-DD HH:mm:ss')}>
+                <span>{moment().subtract(2, 'days').fromNow()}</span>
+            </Tooltip>
+        ),
+    },
+];
 class Demo extends React.Component {
     state = {
         value: '',
@@ -80,7 +114,32 @@ const Home = () => {
             <Layout className="site-layout" style={{ marginLeft: 200 }}>
                 <Header className="site-layout-background" style={{ padding: 0 }} />
                 <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
-                    <div className="site-layout-background" style={{ padding: 24, textAlign: 'center' }}>
+
+                    <div className="site-layout-background" style={{ padding: 24 }}>
+                        <List
+                            className="comment-list"
+                            header={`${data.length} replies`}
+                            itemLayout="horizontal"
+                            dataSource={data}
+                            renderItem={item => (
+                                <li>
+
+                                    <Comment
+                                        actions={item.actions}
+                                        author={item.author}
+                                        avatar={item.avatar}
+                                        content={item.content}
+                                        datetime={item.datetime}
+                                    ><Comment
+                                            actions={item.actions}
+                                            author={item.author}
+                                            avatar={item.avatar}
+                                            content={item.content}
+                                            datetime={item.datetime}
+                                        /></Comment>
+                                </li>
+                            )}
+                        />
                         ...
                         <br />
                         Really
