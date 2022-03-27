@@ -1,0 +1,30 @@
+#root,body,html {
+    height: 100%;
+}
+
+.ant-layout{
+    display: flex;
+    width: 100%;
+    min-height: 100%
+}
+.col {
+    margin-top: 140px
+}
+
+.flexrowallCenter {
+    display: flex;
+    justify-content: space-between;
+}
+
+.flexstyleRow {
+    display: flex;
+}
+.flexstyleforbutton {
+    display: flex;
+    align-items: center;
+}
+.flexstyleColumn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
