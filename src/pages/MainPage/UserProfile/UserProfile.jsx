@@ -2,7 +2,7 @@ import { Layout, Avatar, Row, Col, Menu, Tabs, Empty, Button, Typography } from 
 import React from 'react'
 import { useLocation } from 'react-router-dom';
 import { UserOutlined } from '@ant-design/icons';
-import './UserInfor.css';
+import './UserProfile.css';
 
 const { Content, Sider } = Layout;
 const { SubMenu } = Menu;

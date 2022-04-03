@@ -10,6 +10,30 @@ const { SubMenu } = Menu;
 const { Header, Footer, Content, Sider } = Layout;
 const { TextArea } = Input;
 
+const axios = require('axios').default;
+
+const getPosts = () => {
+    return axios({
+        method: 'post',
+        url: 'http://localhost:3000/posts',
+        data: {
+            title: 'testTitle',
+            author: 'testAuthor'
+        }
+    })
+}
+
+const getComments = () => {
+    return axios({
+        method: 'post',
+        url: 'http://localhost:3000/comments',
+        data: {
+            body: 'testBody',
+            postID: 'testID'
+        }
+    })
+}
+
 const data = [
     {
         actions: [<span key="comment-list-reply-to-0">Reply to</span>],
@@ -140,6 +164,8 @@ const Home = () => {
                                 </li>
                             )}
                         />
+                        <Button  onClick={() => { getPosts().then(res => { console.log(res); }) }}>testPosts</Button>
+                        <Button  onClick={() => { getComments().then(res => { console.log(res); }) }}>testComments</Button>
                         ...
                         <br />
                         Really
