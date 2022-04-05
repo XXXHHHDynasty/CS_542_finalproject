@@ -1,15 +1,24 @@
+
 import { Layout, Avatar, Row, Col, Menu, Tabs, Empty, Button, Typography } from 'antd';
 import React from 'react'
+
 import { useLocation } from 'react-router-dom';
 import { UserOutlined } from '@ant-design/icons';
 import './UserProfile.css';
+
+
 
 const { Content, Sider } = Layout;
 const { SubMenu } = Menu;
 const { TabPane } = Tabs;
 
 const UserInfo = () => {
+
+
+
     return (
+
+        
         <Layout>
             <Sider width={200} className="site-layout-background"
                 style={{
@@ -88,6 +97,8 @@ const UserInfo = () => {
                 </Content>
             </Layout>
         </Layout>
+
+
     )
 }
 
