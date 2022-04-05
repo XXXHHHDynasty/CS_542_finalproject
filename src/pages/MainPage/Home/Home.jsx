@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import './home.css';
-import { Layout, Menu, Input, Button, Comment, Tooltip, List } from 'antd';
+import { Layout, Menu, Input, Button, Comment, Avatar, Tooltip, List } from 'antd';
 
 const { Header, Footer, Content, Sider } = Layout;
 const { TextArea } = Input;
@@ -48,7 +48,7 @@ const Home = () => {
                         renderItem={item => (
                             <li>
                                 <Comment
-                                    avatar={item.src}
+                                    avatar={<Avatar src={item.src} />}
                                     author={item.author}
                                     content={item.msg}
                                 />
