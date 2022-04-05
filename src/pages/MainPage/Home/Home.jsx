@@ -1,10 +1,9 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { createElement, useState } from 'react';
 import './home.css';
 import { Layout, Menu, Input, Button, Comment, Avatar, Tooltip, List } from 'antd';
+import { DislikeOutlined, LikeOutlined, DislikeFilled, LikeFilled } from '@ant-design/icons';
 
 const { Header, Footer, Content, Sider } = Layout;
-const { TextArea } = Input;
 
 const axios = require('axios').default;
 
@@ -34,6 +33,38 @@ const Home = () => {
 
     const [postMessage, setPost] = useState('');
     const [data, setData] = useState('');
+    const [likes, setLikes] = useState(0);
+    const [dislikes, setDislikes] = useState(0);
+    const [action, setAction] = useState(null);
+    
+    const like = () => {
+        setLikes(1);
+        setDislikes(0);
+        setAction('liked');
+      };
+    
+    const dislike = () => {
+        setLikes(0);
+        setDislikes(1);
+        setAction('disliked');
+      };
+      
+    // likes, unlikes, and reply buttons
+    const actions = [
+        <Tooltip key="comment-basic-like" title="Like">
+            <span onClick={like}>
+                {createElement(action === 'liked' ? LikeFilled : LikeOutlined)}
+                <span className="comment-action">{likes}</span>
+            </span>
+        </Tooltip>,
+        <Tooltip key="comment-basic-dislike" title="Dislike">
+            <span onClick={dislike}>
+                {React.createElement(action === 'disliked' ? DislikeFilled : DislikeOutlined)}
+                <span className="comment-action">{dislikes}</span>
+            </span>
+        </Tooltip>,
+        <span key="comment-basic-reply-to">Reply to</span>,
+    ];
 
     return (
         <Layout className="site-layout" style={{ marginLeft: 200 }}>
@@ -48,6 +79,7 @@ const Home = () => {
                         renderItem={item => (
                             <li>
                                 <Comment
+                                    actions={actions}
                                     avatar={<Avatar src={item.src} />}
                                     author={item.author}
                                     content={item.msg}
