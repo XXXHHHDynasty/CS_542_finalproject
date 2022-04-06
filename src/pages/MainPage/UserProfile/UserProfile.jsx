@@ -1,24 +1,80 @@
+import { Layout, Avatar, Modal, Menu, Tabs, Empty, Button, Typography, Radio, Input, Form } from 'antd';
+import React, { useState } from 'react'
 
-import { Layout, Avatar, Row, Col, Menu, Tabs, Empty, Button, Typography } from 'antd';
-import React from 'react'
-
-import { useLocation } from 'react-router-dom';
 import { UserOutlined } from '@ant-design/icons';
 import './UserProfile.css';
-
-
 
 const { Content, Sider } = Layout;
 const { SubMenu } = Menu;
 const { TabPane } = Tabs;
 
+// form component
+const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
+    const [form] = Form.useForm();
+    return (
+        <Modal
+            visible={visible}
+            title="Create a new collection"
+            okText="Create"
+            cancelText="Cancel"
+            onCancel={onCancel}
+            onOk={() => {
+                form
+                    .validateFields()
+                    .then((values) => {
+                        form.resetFields();
+                        onCreate(values);
+                    })
+                    .catch((info) => {
+                        console.log('Validate Failed:', info);
+                    });
+            }}
+        >
+            <Form
+                form={form}
+                layout="vertical"
+                name="form_in_modal"
+                initialValues={{
+                    modifier: 'public',
+                }}
+            >
+                <Form.Item
+                    name="title"
+                    label="Server Title"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please input the title of server!',
+                        },
+                    ]}
+                >
+                    <Input />
+                </Form.Item>
+                <Form.Item name="description" label="Description">
+                    <Input type="textarea" />
+                </Form.Item>
+                <Form.Item name="modifier" className="collection-create-form_last-form-item">
+                    <Radio.Group>
+                        <Radio value="public">Public</Radio>
+                        <Radio value="private">Private</Radio>
+                    </Radio.Group>
+                </Form.Item>
+            </Form>
+        </Modal>
+    );
+};
+
 const UserInfo = () => {
 
-
+    const [visible, setVisible] = useState(false);
+    
+    // create a new server function 
+    const onCreate = (values) => {
+        console.log('Received values of form: ', values);
+        setVisible(false);
+    };
 
     return (
-
-        
         <Layout>
             <Sider width={200} className="site-layout-background"
                 style={{
@@ -66,7 +122,7 @@ const UserInfo = () => {
                 </Menu>
             </Sider>
             <Layout className="site-layout" style={{ marginLeft: 200, padding: 20 }}>
-                <div className='col' className="flexrowallCenter" style={{marginTop: 100}}>
+                <div className="flexrowallCenter" style={{ marginTop: 100 }}>
                     <div className="flexstyleRow">
                         <Avatar size={100} src="https://joeschmoe.io/api/v1/random" style={{ marginLeft: 20 }}>Olivia</Avatar>
                         <div className='flexstyleColumn' style={{ marginLeft: 20 }}>
@@ -78,8 +134,17 @@ const UserInfo = () => {
                         </div>
                     </div>
                     <div className="flexstyleforbutton" style={{ marginRight: 20 }}>
-                        <Button className='flexstyleColumn' type="primary" style={{ marginLeft: 10 }}>Create Server</Button>
-                        <Button className='flexstyleColumn' type="primary" style={{ marginLeft: 10 }}>Manager</Button>
+                        <Button className='flexstyleColumn' type="primary" style={{ marginLeft: 10 }} onClick={() => {
+                            setVisible(true);
+                        }}>Create Server</Button>
+                        <CollectionCreateForm
+                            visible={visible}
+                            onCreate={onCreate}
+                            onCancel={() => {
+                                setVisible(false);
+                            }}
+                        />
+                        <Button className='flexstyleColumn' type="submit" form="createServer" style={{ marginLeft: 10 }}>Manager</Button>
                     </div>
                 </div>
                 <Content style={{ margin: '24px 16px 0', overflow: 'initial', backgroundColor: '#FFF' }}>
@@ -97,8 +162,6 @@ const UserInfo = () => {
                 </Content>
             </Layout>
         </Layout>
-
-
     )
 }
 
