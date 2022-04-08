@@ -1,20 +1,33 @@
-import { Layout, Avatar, Modal, Menu, Tabs, Empty, Button, Typography, Radio, Input, Form } from 'antd';
+import { Layout, Avatar, Modal, Menu, Tabs, Empty, Button, Typography, Radio, Input, Form, Select } from 'antd';
 import React, { useState } from 'react'
 
-import { UserOutlined } from '@ant-design/icons';
+import { UserOutlined, MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import './UserProfile.css';
 
 const { Content, Sider } = Layout;
+const { Option } = Select;
 const { SubMenu } = Menu;
 const { TabPane } = Tabs;
 
-// form component
-const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
+const serverData = ['Server1', 'Server2'];
+const subserverData = {
+    Server1: ['subserver1', 'subserver2', 'subserver3'],
+    Server2: ['subserver4', 'subserver5', 'subserver6'],
+};
+const discussionData = {
+    subserver1: ['discussion1', 'discussion2'],
+    subserver2: ['discussion3', 'discussion4'],
+};
+
+// create server form component
+const CreateServerForm = ({ visible, onCreate, onCancel }) => {
+
     const [form] = Form.useForm();
+
     return (
         <Modal
             visible={visible}
-            title="Create a new collection"
+            title="Create a new Server"
             okText="Create"
             cancelText="Cancel"
             onCancel={onCancel}
@@ -33,7 +46,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
             <Form
                 form={form}
                 layout="vertical"
-                name="form_in_modal"
+                name="createServerForm"
                 initialValues={{
                     modifier: 'public',
                 }}
@@ -53,6 +66,60 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
                 <Form.Item name="description" label="Description">
                     <Input type="textarea" />
                 </Form.Item>
+                <Form.Item name="subserver" label="Subserver" rules={[
+                    {
+                        required: true,
+                        message: 'Please create at least one Subserver!',
+                    },
+                ]}>
+                    <Input placeholder="subserver name" />
+                </Form.Item>
+                <Form.List
+                    name="addsubserver"
+                >
+                    {(fields, { add, remove }, { errors }) => (
+                        <>
+                            {fields.map((field, index) => (
+                                <Form.Item
+                                    label={index === 0 ? 'ExtraSubserver' : ''}
+                                    required={false}
+                                    key={field.key}
+                                >
+                                    <Form.Item
+                                        {...field}
+                                        validateTrigger={['onChange', 'onBlur']}
+                                        rules={[
+                                            {
+                                                required: true,
+                                                whitespace: true,
+                                                message: "Please input subserver's name or delete this field.",
+                                            },
+                                        ]}
+                                        noStyle
+                                    >
+                                        <Input placeholder="subserver name" style={{ margin: '0 10px 0 0' }} />
+                                    </Form.Item>
+                                    {fields.length >= 1 ? (
+                                        <MinusCircleOutlined
+                                            className="dynamic-delete-button"
+                                            onClick={() => remove(field.name)}
+                                        />
+                                    ) : null}
+                                </Form.Item>
+                            ))}
+                            <Form.Item>
+                                <Button
+                                    type="dashed"
+                                    onClick={() => add()}
+                                    icon={<PlusOutlined />}
+                                >
+                                    Add subserver field
+                                </Button>
+                                <Form.ErrorList errors={errors} />
+                            </Form.Item>
+                        </>
+                    )}
+                </Form.List>
                 <Form.Item name="modifier" className="collection-create-form_last-form-item">
                     <Radio.Group>
                         <Radio value="public">Public</Radio>
@@ -64,14 +131,111 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
     );
 };
 
+// manager server form component
+const ManagerServerForm = ({ managerVisible, onManager, onCancelManager }) => {
+
+    const [managerform] = Form.useForm();
+
+    const [subservers, setSubservers] = React.useState([]);
+    const [subserver, setSubserver] = React.useState([subserverData[serverData[0]]][0]);
+    const [discussions, setDiscussions] = React.useState([]);
+    const [discussion, setDiscussion] = React.useState([discussionData[subserverData[serverData[0]][0]]][0])
+
+    // control server's choice
+    const handleServerChange = value => {
+        setSubservers(subserverData[value]);
+        setSubserver(subserverData[value][0]);
+        setDiscussions([]);
+        setDiscussion('');
+    };
+    // control subserver's choice
+    const subserverchange = value => {
+        setDiscussions(discussionData[value]);
+        setDiscussion(discussionData[value][0]);
+    };
+
+    const discussionchange = value => {
+        setDiscussion(value);
+    };
+
+    return (
+        <Modal
+            visible={managerVisible}
+            title="Management"
+            okText="Delete"
+            cancelText="Cancel"
+            onCancel={onCancelManager}
+            footer={[
+                <Button key="Cancel" onClick={onCancelManager}>
+                    Return
+                </Button>,
+                <Button key="delete" type="primary" danger onClick={() => {
+                    managerform
+                        .validateFields()
+                        .then((values) => {
+                            managerform.resetFields();
+                            onManager(values);
+                        })
+                        .catch((info) => {
+                            console.log('Validate Failed:', info);
+                        });
+                }}>
+                    Delete
+                </Button>,
+            ]}
+        >
+            <Form
+                form={managerform}
+                layout="vertical"
+                name="deleteServer"
+                initialValues={{
+                    modifier: 'public',
+                }}
+            >
+                <Form.Item name="delServer" label="Server">
+                    <Select value={serverData[0]} onChange={handleServerChange}>
+                        {serverData.map(server => (
+                            <Option key={server}>{server}</Option>
+                        ))}
+                    </Select>
+                </Form.Item>
+                <Form.Item name="delSubserver" label="Subserver" >
+                    <Select value={subserver} onChange={subserverchange}>
+                        {subservers.map(subserver => (
+                            <Option key={subserver}>{subserver}</Option>
+                        ))}
+                    </Select>
+                </Form.Item>
+                <Form.Item name="delDiscussion" label="Discussion" >
+                    <Select value={discussion} onChange={discussionchange}>
+                        {discussions.map(discussion => (
+                            <Option key={discussion}>{discussion}</Option>
+                        ))}
+                    </Select>
+                </Form.Item>
+            </Form>
+        </Modal>
+    );
+};
+
 const UserInfo = () => {
 
+    // control 'create server' button
     const [visible, setVisible] = useState(false);
-    
+
+    // control 'manager' button
+    const [managerVisible, setmanagerVisible] = useState(false);
+
     // create a new server function 
     const onCreate = (values) => {
         console.log('Received values of form: ', values);
         setVisible(false);
+    };
+
+    // manage servers
+    const onManager = (values) => {
+        console.log('ssss', values);
+        setmanagerVisible(false);
     };
 
     return (
@@ -137,14 +301,22 @@ const UserInfo = () => {
                         <Button className='flexstyleColumn' type="primary" style={{ marginLeft: 10 }} onClick={() => {
                             setVisible(true);
                         }}>Create Server</Button>
-                        <CollectionCreateForm
+                        <CreateServerForm
                             visible={visible}
                             onCreate={onCreate}
                             onCancel={() => {
                                 setVisible(false);
                             }}
                         />
-                        <Button className='flexstyleColumn' type="submit" form="createServer" style={{ marginLeft: 10 }}>Manager</Button>
+                        <Button className='flexstyleColumn' type="primary" danger style={{ marginLeft: 10 }} onClick={() => {
+                            setmanagerVisible(true);
+                        }}>Delete Server</Button>
+                        <ManagerServerForm
+                            managerVisible={managerVisible}
+                            onManager={onManager}
+                            onCancelManager={() => {
+                                setmanagerVisible(false);
+                            }} />
                     </div>
                 </div>
                 <Content style={{ margin: '24px 16px 0', overflow: 'initial', backgroundColor: '#FFF' }}>
