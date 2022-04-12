@@ -1,101 +1,175 @@
 {
-  "posts": [
-    {
-      "id": 1,
-      "title": "json-server",
-      "src": "https://joeschmoe.io/api/v1/random",
-      "author": "typicode"
+    "posts": [
+        {
+            "id": 1,
+            "title": "json-server",
+            "src": "https://joeschmoe.io/api/v1/random",
+            "author": "typicode"
+        },
+        {
+            "id": 2,
+            "title": "json-server",
+            "src": "https://joeschmoe.io/api/v1/random",
+            "author": "typicode"
+        },
+        {
+            "title": "testTitle",
+            "author": "testAuthor",
+            "src": "https://joeschmoe.io/api/v1/random",
+            "id": 3
+        },
+        {
+            "title": "testTitle",
+            "author": "testAuthor",
+            "src": "https://joeschmoe.io/api/v1/random",
+            "id": 4
+        },
+        {
+            "title": "testTitle",
+            "author": "testAuthor",
+            "src": "https://joeschmoe.io/api/v1/random",
+            "id": 5
+        },
+        {
+            "title": "testTitle",
+            "author": "testAuthor",
+            "src": "https://joeschmoe.io/api/v1/random",
+            "id": 6
+        },
+        {
+            "title": "testTitle",
+            "author": "testAuthor",
+            "src": "https://joeschmoe.io/api/v1/random",
+            "id": 7
+        },
+        {
+            "title": "testTitle",
+            "author": "testAuthor",
+            "src": "https://joeschmoe.io/api/v1/random",
+            "id": 8
+        },
+        {
+            "title": "testTitle",
+            "author": "testAuthor",
+            "src": "https://joeschmoe.io/api/v1/random",
+            "id": 9
+        },
+        {
+            "title": "testTitle",
+            "author": "testAuthor",
+            "src": "https://joeschmoe.io/api/v1/random",
+            "id": 10
+        },
+        {
+            "title": "testTitle",
+            "author": "testAuthor",
+            "msg": "123",
+            "id": 11
+        },
+        {
+            "title": "testTitle",
+            "author": "testAuthor",
+            "msg": "",
+            "id": 12
+        },
+        {
+            "title": "testTitle",
+            "author": "testAuthor",
+            "msg": "12345",
+            "id": 13
+        }
+    ],
+    "comments": [
+        {
+            "id": 1,
+            "body": "some comment",
+            "postId": 1
+        },
+        {
+            "body": "testBody",
+            "postID": "testID",
+            "id": 2
+        },
+        {
+            "body": "testBody",
+            "postID": "testID",
+            "id": 3
+        },
+        {
+            "body": "testBody",
+            "postID": "testID",
+            "id": 4
+        }
+    ],
+    "profile": {
+        "name": "typicode"
     },
-    {
-      "id": 2,
-      "title": "json-server",
-      "src": "https://joeschmoe.io/api/v1/random",
-      "author": "typicode"
-    },
-    {
-      "title": "testTitle",
-      "author": "testAuthor",
-      "src": "https://joeschmoe.io/api/v1/random",
-      "id": 3
-    },
-    {
-      "title": "testTitle",
-      "author": "testAuthor",
-      "src": "https://joeschmoe.io/api/v1/random",
-      "id": 4
-    },
-    {
-      "title": "testTitle",
-      "author": "testAuthor",
-      "src": "https://joeschmoe.io/api/v1/random",
-      "id": 5
-    },
-    {
-      "title": "testTitle",
-      "author": "testAuthor",
-      "src": "https://joeschmoe.io/api/v1/random",
-      "id": 6
-    },
-    {
-      "title": "testTitle",
-      "author": "testAuthor",
-      "src": "https://joeschmoe.io/api/v1/random",
-      "id": 7
-    },
-    {
-      "title": "testTitle",
-      "author": "testAuthor",
-      "src": "https://joeschmoe.io/api/v1/random",
-      "id": 8
-    },
-    {
-      "title": "testTitle",
-      "author": "testAuthor",
-      "src": "https://joeschmoe.io/api/v1/random",
-      "id": 9
-    },
-    {
-      "title": "testTitle",
-      "author": "testAuthor",
-      "src": "https://joeschmoe.io/api/v1/random",
-      "id": 10
-    },
-    {
-      "title": "testTitle",
-      "author": "testAuthor",
-      "msg": "123",
-      "id": 11
-    },
-    {
-      "title": "testTitle",
-      "author": "testAuthor",
-      "msg": "",
-      "id": 12
-    }
-  ],
-  "comments": [
-    {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
-    },
-    {
-      "body": "testBody",
-      "postID": "testID",
-      "id": 2
-    },
-    {
-      "body": "testBody",
-      "postID": "testID",
-      "id": 3
-    },
-    {
-      "body": "testBody",
-      "postID": "testID",
-      "id": 4
-    }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+    "servers": [
+        {
+            "id": 1,
+            "title": "WPI Lifestyle",
+            "subServers": [
+                {
+                    "id": 1,
+                    "title": "Free chatting"
+                },
+                {
+                    "id": 2,
+                    "title": "Foods"
+                },
+                {
+                    "id": 3,
+                    "title": "Games"
+                },
+                {
+                    "id": 4,
+                    "title": "Sports"
+                },
+                {
+                    "id": 5,
+                    "title": "Musics"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "title": "WPI Study",
+            "subServers": [
+                {
+                    "id": 1,
+                    "title": "Welcome"
+                },
+                {
+                    "id": 2,
+                    "title": "Courses"
+                },
+                {
+                    "id": 3,
+                    "title": "Project help"
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "title": "Fun things sharing place",
+            "subServers": [
+                {
+                    "id": 1,
+                    "title": "Free chatting"
+                },
+                {
+                    "id": 2,
+                    "title": "Memes"
+                },
+                {
+                    "id": 3,
+                    "title": "Pictures"
+                },
+                {
+                    "id": 4,
+                    "title": "Videos"
+                }
+            ]
+        }
+    ]
 }
