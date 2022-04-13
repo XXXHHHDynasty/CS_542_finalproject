@@ -11,19 +11,6 @@ const { TabPane } = Tabs;
 
 const axios = require('axios').default;
 
-const createServer = (data) => {
-    let firstid = 1;
-
-    return axios({
-        method: 'post',
-        url: 'http://localhost:3000/servers',
-        data: {
-            title: data.title,
-            subServers: [{ id: firstid++, title: data.subserver }]
-        }
-    });
-}
-
 const serverData = ['Server1', 'Server2'];
 const subserverData = {
     Server1: ['subserver1', 'subserver2', 'subserver3'],
@@ -234,7 +221,63 @@ const ManagerServerForm = ({ managerVisible, onManager, onCancelManager }) => {
 };
 
 const UserInfo = () => {
-    
+    // 有问题不会改。。。得改create form逻辑
+    const createServer = (data) => {
+        let firstid = 1;
+        // const { subServer } = data;
+        // const { addsubserver } = data;
+
+        // const serverArr = [];
+        // serverArr.fill(subServer).fill(addsubserver);
+
+        if (data.addsubserver == null) {
+            return axios({
+                method: 'post',
+                url: 'http://localhost:3000/servers',
+                data: {
+                    title: data.title,
+                    subServers: [{ id: firstid++, title: data.subserver }]
+                }
+            });
+        }
+        else {
+            return axios({
+                method: 'post',
+                url: 'http://localhost:3000/servers',
+                data: {
+                    title: data.title,
+                    subServers: [{ id: firstid++, title: data.subserver }]
+                }
+            }).then(axios({
+                method: 'post',
+                url: 'http://localhost:3000/servers/subServers',
+                data: {
+                    title: data.addsubserver[0],
+                    id: firstid++
+                }
+            }));
+        }
+    }
+
+    // 这块儿也有问题不会改，也交给你了。。。
+    const updateServer = (id) => {
+        return axios({
+            method: 'get',
+            url: 'http://localhost:3000/servers',
+            params: {
+                id: id
+            }
+        })
+    }
+
+    // 这块儿好像没用。。
+    const [serverData, setServerData] = useState();
+    useEffect(() => {
+        updateServer().then(res => {
+            setServerData(res.data);
+        })
+    })
+
     // control 'create server' button
     const [visible, setVisible] = useState(false);
 
@@ -245,6 +288,9 @@ const UserInfo = () => {
     const onCreate = (values) => {
         console.log('Received values of form: ', values);
         createServer(values);
+        updateServer().then(res => {
+            setServerData(res.data);
+        });
         setVisible(false);
     };
 
