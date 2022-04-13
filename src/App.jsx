@@ -7,10 +7,11 @@ import 'antd/dist/antd.min.css'
 const { Header, Sider } = Layout;
 const { SubMenu } = Menu;
 
+const axios = require('axios').default;
+
 const App = () => {
     const [menuData, setMenuData] = useState();
 
-    const axios = require('axios').default;
     const getData = async () => {
         const res = await axios(
             'http://localhost:3000/servers',
@@ -19,10 +20,6 @@ const App = () => {
             },
         );
         return res;
-    }
-
-    const testres = () => {
-        getData()
     }
 
     const getMenu = (data) => {
