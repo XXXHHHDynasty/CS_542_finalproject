@@ -19,12 +19,19 @@
 .flexstyleRow {
     display: flex;
 }
+
 .flexstyleforbutton {
     display: flex;
     align-items: center;
 }
+
 .flexstyleColumn {
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+.ant-form-item-control-input-content {
+    display: flex;
+    align-items: center;
 }

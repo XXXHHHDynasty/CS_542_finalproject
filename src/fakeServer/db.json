@@ -97,8 +97,5 @@
   ],
   "profile": {
     "name": "typicode"
-  },
-  "login":{
-    "status" : 200
   }
 }
