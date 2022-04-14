@@ -300,7 +300,7 @@ const UserInfo = () => {
         updateServer().then(res => {
             setServerData(res.data);
         })
-    })
+    }, [])
 
     // control 'create server' button
     const [visible, setVisible] = useState(false);

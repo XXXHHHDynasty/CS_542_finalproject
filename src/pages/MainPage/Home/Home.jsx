@@ -38,7 +38,7 @@ const Home = () => {
         updateContents().then(res => {
             setData(res.data);
         })
-    });
+    }, []);
     
     const [postMessage, setPost] = useState('');
     const [data, setData] = useState('');
