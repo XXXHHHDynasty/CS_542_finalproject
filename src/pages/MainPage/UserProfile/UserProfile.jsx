@@ -233,7 +233,7 @@ const UserInfo = () => {
         if (data.addsubserver == null) {
             return axios({
                 method: 'post',
-                url: 'http://localhost:3000/servers',
+                url: 'http://localhost:3004/servers',
                 data: {
                     title: data.title,
                     subServers: [{ id: firstid++, title: data.subserver }]
@@ -243,14 +243,14 @@ const UserInfo = () => {
         else {
             return axios({
                 method: 'post',
-                url: 'http://localhost:3000/servers',
+                url: 'http://localhost:3004/servers',
                 data: {
                     title: data.title,
                     subServers: [{ id: firstid++, title: data.subserver }]
                 }
             }).then(axios({
                 method: 'post',
-                url: 'http://localhost:3000/servers/subServers',
+                url: 'http://localhost:3004/servers/subServers',
                 data: {
                     title: data.addsubserver[0],
                     id: firstid++
@@ -263,7 +263,7 @@ const UserInfo = () => {
     const updateServer = (id) => {
         return axios({
             method: 'get',
-            url: 'http://localhost:3000/servers',
+            url: 'http://localhost:3004/servers',
             params: {
                 id: id
             }

@@ -14,7 +14,7 @@ const App = () => {
 
     const getData = async () => {
         const res = await axios(
-            'http://localhost:3000/servers',
+            'http://localhost:3004/servers',
             {
                 method: 'get',
             },
