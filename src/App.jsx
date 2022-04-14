@@ -56,7 +56,7 @@ const App = () => {
     }
 
     const goUserInfo = () => {
-        navigate('/userInfo', {
+        navigate('/userProfile', {
             state: { username: "testUsername" }
         })
     }

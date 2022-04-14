@@ -11,6 +11,30 @@ const { TabPane } = Tabs;
 
 const axios = require('axios').default;
 
+// 你的manage form代码要大改才能运行
+
+// const getServerData = async () => {
+//     const res = await axios(
+//         'http://localhost:3004/servers',
+//         {
+//             method: 'get',
+//         },
+//     );
+//     return res;
+// }
+
+// const getServerInfo = () => {
+//     const serverTitle = [];
+//     getServerData().then(res => {
+//         const len = res.data.length;
+//         for(let i = 0; i < len; i ++){
+//             serverTitle.fill(res.data[i].title);
+//         }
+//     })
+//     return serverTitle;
+// }
+
+// const serverData = getServerInfo();
 const serverData = ['Server1', 'Server2'];
 const subserverData = {
     Server1: ['subserver1', 'subserver2', 'subserver3'],
@@ -326,6 +350,7 @@ const UserInfo = () => {
                     />
                     <Button className='flexstyleColumn' type="primary" danger style={{ marginLeft: 10 }} onClick={() => {
                         setmanagerVisible(true);
+                        // getServerData().then(res => (console.log(res.data[1].title)))
                     }}>Delete Server</Button>
                     <ManagerServerForm
                         managerVisible={managerVisible}
