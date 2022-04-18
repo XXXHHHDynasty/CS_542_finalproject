@@ -27,6 +27,7 @@ while True:
         id = data[-1]["id"]
         title = data[-1]["title"]
         author = data[-1]["author"]
+        msg = data[-1]["msg"]
         # discussion(id, title, author)
 
     # COMMENTS
@@ -109,7 +110,37 @@ while True:
 #     conn.close()
 #     return jsonify(result)
 
+#@app.route('/posts', methods=['POST', 'GET'])
+# def temp():
+#     data = request.get_data().decode("utf-8")
+#     if(data != ''):
+#         store_db(data)
+#     return data
 
+# take user input and store in database
+# def store_db(data):
+#     conn = None
+#     try:
+#         # read connection parameters
+#         params = config()  # get DB info from config.py
+
+#         # connect to the PostgreSQL server
+#         print('Connecting to the PostgreSQL database...')
+#         conn = psycopg2.connect(**params)
+
+#         cur = conn.cursor()  # create a cursor
+#         cur.execute(f"INSERT INTO posts(post) VALUES ('{data}')")  # insert into DB
+#         conn.commit()
+#         conn.close()
+
+#     except (Exception, psycopg2.DatabaseError) as error:
+#         print(error)
+        
+#     finally:
+#         if conn is not None:
+#             conn.close()
+#             print('Database connection closed, inserted successfully.')
+    
 
 def roles(id, role):
     # connect to DB
