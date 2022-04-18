@@ -171,5 +171,19 @@
         }
       ]
     }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "username": "usertest1",
+      "password": "123456",
+      "remember": true
+    },
+    {
+      "username": "user123",
+      "password": "123456",
+      "remember": true,
+      "id": 2
+    }
   ]
 }

@@ -1,168 +1,132 @@
-import { useEffect,useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
-import { Button, Checkbox, Form, Input, Select, message } from 'antd';
-import '/node_modules/antd/dist/antd.css';
+import { useNavigate, useLocation } from "react-router-dom";
+import { Button, Checkbox, Form, Input } from "antd";
+import { useEffect } from 'react'
+import "/node_modules/antd/dist/antd.css";
+import illustration from "../../images/WPIlogo.jpeg";
+import "./login.css";
 
-import illustration from '../../images/WPIlogo.jpeg';
-
-import passwordImg from '../../images/password.png';
-import usernameImg from '../../images/username.png';
-
-import './login.css';
-
-const axios = require('axios').default;
-//login api function
-const login = (request) => {
-  return axios({
-      method: 'post',
-      url: 'http://localhost:3000/login',
-      data: {
-          "username": request.username,
-          "password": request.password
-      }
-  })
-}
+const axios = require("axios").default;
 
 const Login = () => {
-  const navigate = useNavigate()
-  const [username, setUsername] = useState();
-  const [password, setPassword] = useState();
-  
-  function usernameChange(e){
-    setUsername(e.target.value);
-  }
-
-  function passwordChange(e){
-    setPassword(e.target.value);
-  }
-
-  async function loginClick(){
-    let data = await login({
-      "username" : username,
-      "password" : password
-    });
-    if(data.status == 200){
-      navigate("/home");
-    }else{
-      console.log("login fail")
-    }
-  }
-
-  const goSignup = () => {
-    navigate('/signup', {})
-  }
-
-  // const goHome = () => {
-  //   navigate('/home', {
-  //     state: { username: "testUsername" }
-  //   })
-  // }
-
   const [form] = Form.useForm();
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const onFinish = (values) => {
-    console.log('Success:', values);
+  // receive information from 'register' page
+  useEffect(() => {
+    form.setFieldsValue({
+      username: location.state.username,
+      password: location.state.password
+    })
+}, []);
+  
+  // navigate to 'Signup' Page
+  const goSignup = () => {
+    navigate("/signup", {});
   };
 
+  // naviagte to 'Home' Page
+  const goHome = (username) => {
+    navigate('/home', { username })
+  }
+
+  // submit users' information & naviagte to 'Home' page
+  const onFinish = (values) => {
+    return axios({
+      method: 'post',
+      url: 'http://localhost:3000/users',
+      data: {
+        username: values.username,
+        password: values.password,
+        remember: values.remember
+      }
+    }),
+      goHome(values.username)
+  };
+
+  // fail message when login failed
   const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
+    console.log("Failed:", errorInfo);
   };
 
   return (
-    <div className='login-wrap'>
-      <div className='login-wrap-center'>
-        <div className='logo-wrap'>
-          <img src={illustration} className='.illustration' />
+    <div className="login-wrap">
+      <div className="login-wrap-center">
+        <div className="logo-wrap">
+          <img src={illustration} className=".illustration" />
         </div>
-        <div className='form-wrap'>
+        <div className="form-wrap">
           <div>
-            <h1>WPI Chat System</h1>
-            <h3>Welcome to log in</h3>
+            <div style={{ fontSize: 30, color: '#333' }}>WPI Chat System</div>
+            <div style={{ fontSize: 15, color: '#333' }}>Welcome to log in</div>
           </div>
           <Form
+            form={form}
             name="basic"
-            labelCol={{
-              span: 8,
-            }}
-            wrapperCol={{
-              span: 16,
-            }}
-            initialValues={{
-              remember: true,
-            }}
+            initialValues={{remember: true}}
+            labelCol={{ span: 8 }}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
-            autoComplete="off"
+            autoComplete="on"
           >
             <Form.Item
               label="Username"
               name="username"
-              onChange={usernameChange}
               rules={[
                 {
                   required: true,
-                  message: 'Please input your username',
+                  message: "Please input your username",
                 },
               ]}
             >
-              <Input placeholder='input username' />
+              <Input placeholder="input username" />
             </Form.Item>
             <Form.Item
               label="Password"
               name="password"
-              onChange={passwordChange}
               rules={[
                 {
                   required: true,
-                  message: 'Please input your password',
+                  message: "Please input your password",
                 },
               ]}
             >
-              <Input.Password placeholder='input password' />
+              <Input.Password placeholder="input password" />
             </Form.Item>
-
             <Form.Item
               name="remember"
               valuePropName="checked"
-              wrapperCol={{
-                offset: 8,
-                span: 16,
-              }}
             >
               <Checkbox>Remember me</Checkbox>
             </Form.Item>
-
-            <Form.Item
-              wrapperCol={{
-                offset: 8,
-                span: 16,
-              }}
-            >
-              <Button onClick={loginClick} type="primary" htmlType="submit">
+            <Form.Item>
+              <Button style={{ width: '100%' }} onClick={() => {
+                form
+                  .validateFields()
+                  .then((values) => {
+                    form.resetFields();
+                    onFinish(values);
+                  })
+                  .catch((info) => {
+                    console.log('Validate Failed:', info);
+                  });
+              }} type="primary" htmlType="submit">
                 Log In
               </Button>
             </Form.Item>
           </Form>
-          {/* <div className='divider' /> */}
-          <div>
-            Don't have an account?
-            <Button
-              type="link"
-              onClick={goSignup}
-            >
-              create a new account
-            </Button>
-            <Button
-              type="link"
-              
-            >
-              Enter as anonymous user
-            </Button>
+          <div className="loginOtherSelection">
+            <div style={{ fontSize: 12, color: '#666', padding: '4px 15px 4px 15px' }}>Don't have an account?</div>
+            <div className="buttonColletion">
+              <Button type="link" style={{ fontSize: 12 }} onClick={goSignup}>
+                create a new account
+              </Button>
+              <Button type="link" style={{ fontSize: 12 }}>Enter as anonymous user</Button>
+            </div>
           </div>
         </div>
       </div>
     </div>
-
   );
 };
 
