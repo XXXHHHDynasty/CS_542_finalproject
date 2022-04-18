@@ -261,5 +261,31 @@
         }
       ]
     }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "username": "usertest1",
+      "password": "123456",
+      "remember": true
+    },
+    {
+      "username": "user123",
+      "password": "123456",
+      "remember": true,
+      "id": 2
+    },
+    {
+      "username": "123",
+      "password": "123",
+      "remember": true,
+      "id": 3
+    },
+    {
+      "username": "123123",
+      "password": "123123",
+      "remember": true,
+      "id": 4
+    }
   ]
 }

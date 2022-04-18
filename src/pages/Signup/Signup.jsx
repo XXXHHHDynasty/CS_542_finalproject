@@ -2,26 +2,21 @@ import { useEffect } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { Button, Checkbox, Form, Input, Select, message } from 'antd';
 import '/node_modules/antd/dist/antd.css';
-
 import illustration from '../../images/WPIlogo.jpeg';
-import passwordImg from '../../images/password.png';
-import usernameImg from '../../images/username.png';
-
 import './signup.css';
 
 const Signup = () => {
+
+  const [form] = Form.useForm();
   const navigate = useNavigate()
 
   const goLogin = () => {
-    navigate('/login', {
-      state: { username: "testUsername" }
-    })
+    navigate('/login', {})
   }
-
-  const [form] = Form.useForm();
 
   const onFinish = (values) => {
     console.log('Success:', values);
+    navigate('/login', { state: values })
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -36,16 +31,14 @@ const Signup = () => {
         </div>
         <div className='form-wrap'>
           <div>
-            <h1>WPI Chat System</h1>
-            <h3>Welcome to sign up</h3>
+          <div style={{ fontSize: 30, color: '#333' }}>WPI Chat System</div>
+            <div style={{ fontSize: 15, color: '#333' }}>Welcome to log in</div>
           </div>
           <Form
+            form={form}
             name="basic"
             labelCol={{
               span: 8,
-            }}
-            wrapperCol={{
-              span: 16,
             }}
             initialValues={{
               remember: true,
@@ -66,7 +59,6 @@ const Signup = () => {
             >
               <Input placeholder='input username' />
             </Form.Item>
-
             <Form.Item
               label="Password"
               name="password"
@@ -79,34 +71,46 @@ const Signup = () => {
             >
               <Input.Password placeholder='input password' />
             </Form.Item>
-
             <Form.Item
-              label="Password"
-              name="password"
+              label="password"
+              name="Confirm"
               rules={[
                 {
                   required: true,
                   message: 'Please confirm your password!',
                 },
+                ({ getFieldValue }) => ({
+                  validator(_, value) {
+                    if (!value || getFieldValue('password') === value) {
+                      return Promise.resolve();
+                    }
+                    return Promise.reject(new Error('The two passwords that you entered do not match!'));
+                  },
+                }),
               ]}
             >
               <Input.Password placeholder='confirm password' />
             </Form.Item>
-
-            <Form.Item
-              wrapperCol={{
-                offset: 8,
-                span: 16,
-              }}
-            >
-              <Button onClick={goLogin} type="primary" htmlType="submit">
+            <Form.Item>
+              <Button onClick={() => {
+                form
+                  .validateFields()
+                  .then((values) => {
+                    form.resetFields();
+                    onFinish(values);
+                  })
+                  .catch((info) => {
+                    console.log('Validate Failed:', info);
+                  });
+              }} style={{ width: '100%' }} type="primary" htmlType="submit">
                 Create Account
               </Button>
             </Form.Item>
           </Form>
-          <div>
+          <div style={{ fontSize: 12, color: '#666', padding: '4px 15px 4px 15px' }}>
             Already have an account?
             <Button
+              style={{ fontSize: 12 }}
               type="link"
               onClick={goLogin}
             >

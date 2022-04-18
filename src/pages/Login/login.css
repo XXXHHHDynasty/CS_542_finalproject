@@ -1,4 +1,4 @@
-.login-wrap, .divider, .login-wrap-center, .logo-wrap, .icon, .illustration, .form-wrap, .title, .welcome, .copyright {
+.login-wrap, .divider, .login-wrap-center, .logo-wrap, .icon, .illustration, .title, .welcome, .copyright {
   position: relative;
   display: flex;
   display: flex;
@@ -10,11 +10,6 @@
   background-image: url('../../images/loginBG.jpeg');
   background-repeat: no-repeat;
   background-size: cover;
-}
-
-.divider {
-  margin: -24px 0 24px;
-  border-bottom: 1px solid #eee;
 }
 
 .login-wrap-center, .logo-wrap, .icon, .illustration, .form-wrap, .title, .welcome {
@@ -35,13 +30,14 @@
   width: 45%;
   height: 100%;
 }
+
 .icon {
   width: 150px;
 }
+
 .illustration {
   height: 80%;
 }
-
 
 .form-wrap, .title, .welcome {
   display: flex;
@@ -50,12 +46,14 @@
   width: 45%;
   height: 90%;
 }
+
 .title {
   color: #333333;
   font-weight: 400;
   font-size: 4vh;
   text-align: center;
 }
+
 .welcome {
   color: #a9a9a9;
   font-weight: 400;
@@ -69,4 +67,13 @@
   left: 50%;
   color: #fff;
   transform: translate(-50%);
+}
+
+.loginOtherSelection {
+  display: flex;
+  flex-direction: column;  
+}
+
+.buttonColletion {
+  display: flex;
 }
