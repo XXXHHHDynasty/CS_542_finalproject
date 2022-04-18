@@ -14,7 +14,7 @@ const App = () => {
 
     const getData = async () => {
         const res = await axios(
-            'http://localhost:3000/servers',
+            'http://localhost:3004/servers',
             {
                 method: 'get',
             },
@@ -55,8 +55,8 @@ const App = () => {
         })
     }
 
-    const goUserInfo = () => {
-        navigate('/userInfo', {
+    const goUserProfile = () => {
+        navigate('/userProfile', {
             state: { username: "testUsername" }
         })
     }
@@ -67,8 +67,7 @@ const App = () => {
                 <div className="logo" />
                 <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
                     <Menu.Item key="1" onClick={goHome}>Home</Menu.Item>
-                    <Menu.Item key="2" onClick={goUserInfo}>User Info</Menu.Item>
-                    <Menu.Item key="3">Nav 3</Menu.Item>
+                    <Menu.Item key="2" onClick={goUserProfile}>User Profile</Menu.Item>
                 </Menu>
             </Header>
             <Sider width={200} className="site-layout-background"

@@ -11,6 +11,30 @@ const { TabPane } = Tabs;
 
 const axios = require('axios').default;
 
+// 你的manage form代码要大改才能运行
+
+// const getServerData = async () => {
+//     const res = await axios(
+//         'http://localhost:3004/servers',
+//         {
+//             method: 'get',
+//         },
+//     );
+//     return res;
+// }
+
+// const getServerInfo = () => {
+//     const serverTitle = [];
+//     getServerData().then(res => {
+//         const len = res.data.length;
+//         for(let i = 0; i < len; i ++){
+//             serverTitle.fill(res.data[i].title);
+//         }
+//     })
+//     return serverTitle;
+// }
+
+// const serverData = getServerInfo();
 const serverData = ['Server1', 'Server2'];
 const subserverData = {
     Server1: ['subserver1', 'subserver2', 'subserver3'],
@@ -233,7 +257,7 @@ const UserInfo = () => {
         if (data.addsubserver == null) {
             return axios({
                 method: 'post',
-                url: 'http://localhost:3000/servers',
+                url: 'http://localhost:3004/servers',
                 data: {
                     title: data.title,
                     subServers: [{ id: firstid++, title: data.subserver }]
@@ -243,14 +267,14 @@ const UserInfo = () => {
         else {
             return axios({
                 method: 'post',
-                url: 'http://localhost:3000/servers',
+                url: 'http://localhost:3004/servers',
                 data: {
                     title: data.title,
                     subServers: [{ id: firstid++, title: data.subserver }]
                 }
             }).then(axios({
                 method: 'post',
-                url: 'http://localhost:3000/servers/subServers',
+                url: 'http://localhost:3004/servers/subServers',
                 data: {
                     title: data.addsubserver[0],
                     id: firstid++
@@ -263,7 +287,7 @@ const UserInfo = () => {
     const updateServer = (id) => {
         return axios({
             method: 'get',
-            url: 'http://localhost:3000/servers',
+            url: 'http://localhost:3004/servers',
             params: {
                 id: id
             }
@@ -276,7 +300,7 @@ const UserInfo = () => {
         updateServer().then(res => {
             setServerData(res.data);
         })
-    })
+    }, [])
 
     // control 'create server' button
     const [visible, setVisible] = useState(false);
@@ -326,6 +350,7 @@ const UserInfo = () => {
                     />
                     <Button className='flexstyleColumn' type="primary" danger style={{ marginLeft: 10 }} onClick={() => {
                         setmanagerVisible(true);
+                        // getServerData().then(res => (console.log(res.data[1].title)))
                     }}>Delete Server</Button>
                     <ManagerServerForm
                         managerVisible={managerVisible}
