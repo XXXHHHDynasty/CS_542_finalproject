@@ -1,6 +1,5 @@
-import { useEffect } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
-import { Button, Checkbox, Form, Input, Select, message } from 'antd';
+import { useNavigate } from 'react-router-dom';
+import { Button, Form, Input } from 'antd';
 import '/node_modules/antd/dist/antd.css';
 import illustration from '../../images/WPIlogo.jpeg';
 import './signup.css';
@@ -10,15 +9,18 @@ const Signup = () => {
   const [form] = Form.useForm();
   const navigate = useNavigate()
 
+  // navigate to 'login' page
   const goLogin = () => {
     navigate('/login', {})
   }
 
+  // complete form & naviagte to 'login' page with data
   const onFinish = (values) => {
     console.log('Success:', values);
     navigate('/login', { state: values })
   };
 
+  // print fail message
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };

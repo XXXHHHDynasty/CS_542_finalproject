@@ -8,6 +8,7 @@ import "./login.css";
 const axios = require('axios').default;
 
 const Login = () => {
+
   const navigate = useNavigate()
   const [form] = Form.useForm();
   const location = useLocation();
@@ -15,8 +16,8 @@ const Login = () => {
   // receive information from 'register' page
   useEffect(() => {
     form.setFieldsValue({
-      username: location.state.username,
-      password: location.state.password
+      username: location.state ? location.state.username : '',
+      password: location.state ? location.state.password : ''
     })
   }, []);
 
@@ -45,7 +46,7 @@ const Login = () => {
       goHome(values.username)
   };
 
-  // fail message when login failed
+  // print message when login failed
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
