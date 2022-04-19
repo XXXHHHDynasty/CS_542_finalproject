@@ -11,7 +11,7 @@ const axios = require('axios').default;
 const pushContents = (msg) => {
     return axios({
         method: 'post',
-        url: 'http://localhost:3004/posts',
+        url: 'http://localhost:3000/posts',
         data: {
             title: 'testTitle',
             author: 'testAuthor',
@@ -24,7 +24,7 @@ const pushContents = (msg) => {
 const updateContents = (id) => {
     return axios({
         method: 'get',
-        url: 'http://localhost:3004/posts',
+        url: 'http://localhost:3000/posts',
         params:{
             id: id
         }

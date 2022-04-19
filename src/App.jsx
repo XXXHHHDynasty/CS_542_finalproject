@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Navigate, useNavigate, Outlet } from 'react-router-dom'
+import { useNavigate, Outlet } from 'react-router-dom'
 import { Layout, Menu } from 'antd';
-import { UserOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.min.css'
 
 const { Header, Sider } = Layout;
@@ -10,55 +9,46 @@ const { SubMenu } = Menu;
 const axios = require('axios').default;
 
 const App = () => {
-    const [menuData, setMenuData] = useState();
+    
+    const navigate = useNavigate()
+    const [server, setserver] = useState([]);
 
-    const getData = async () => {
-        const res = await axios(
-            'http://localhost:3004/servers',
-            {
-                method: 'get',
-            },
-        );
-        return res;
-    }
-
-    const getMenu = (data) => {
-        return Object.values(data).map((item, index) => {
-            return (
-                <SubMenu key={item.id} title={item.title} icon={<UserOutlined />}>
-                    {getSubMenu(item.subServers)}
-                </SubMenu>
-            )
-        })
-    }
-
-    const getSubMenu = (data) => {
-        return Object.values(data).map((item, index) => {
-            return (
-                <Menu.Item key={item.id}>{item.title}</Menu.Item>
-            )
-        })
-    }
-
+    // get menu
     useEffect(() => {
-        getData().then(res => {
-            const data_menu = getMenu(res.data);
-            setMenuData(data_menu);
-        });
+        axios.get(`http://localhost:3000/servers`).then(res => {
+            setserver(res.data)
+        })
     }, []);
 
-    const navigate = useNavigate()
-
-    const goHome = () => {
-        navigate('/home', {
-            state: { username: "testUsername" }
-        })
+    // Process first-level menu item
+    const renderMenu = (item) => {
+        return (
+            <Menu.Item key={item.id}>{item.title}</Menu.Item>
+        )
     }
 
+    // Process child menu item
+    const renderSubMnenu = (value) => {
+        return (
+            <SubMenu key={value.id} title={value.title}>
+                {
+                    value.subServers && value.subServers.map(item => {
+                        return item.subServers && item.subServers.length > 0 ? renderSubMnenu(item) : renderMenu(item)
+                    })
+                }
+            </SubMenu>
+        )
+
+    }
+
+    // navigate to 'home' page
+    const goHome = () => {
+        navigate('/home', {})
+    }
+
+    // navigate to 'UserProfile' page
     const goUserProfile = () => {
-        navigate('/userProfile', {
-            state: { username: "testUsername" }
-        })
+        navigate('/userProfile', {})
     }
 
     return (
@@ -84,8 +74,13 @@ const App = () => {
                     defaultSelectedKeys={['1']}
                     defaultOpenKeys={['sub1']}
                     style={{ height: '100%', borderRight: 0 }}
+
                 >
-                    {menuData}
+                    {
+                        server && server.map(firstItem => {
+                            return firstItem.subServers && firstItem.subServers.length > 0 ? renderSubMnenu(firstItem) : renderMenu(firstItem)
+                        })
+                    }
                 </Menu>
             </Sider>
             <Outlet />
