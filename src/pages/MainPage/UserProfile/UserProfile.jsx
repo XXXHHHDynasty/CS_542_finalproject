@@ -245,62 +245,44 @@ const ManagerServerForm = ({ managerVisible, onManager, onCancelManager }) => {
 };
 
 const UserInfo = () => {
-    // 有问题不会改。。。得改create form逻辑
-    const createServer = (data) => {
-        let firstid = 1;
-        // const { subServer } = data;
-        // const { addsubserver } = data;
 
-        // const serverArr = [];
-        // serverArr.fill(subServer).fill(addsubserver);
+    // Get the latest server data
+    useEffect(() => {
+        updateServer()
+    }, [])
 
-        if (data.addsubserver == null) {
-            return axios({
-                method: 'post',
-                url: 'http://localhost:3004/servers',
-                data: {
-                    title: data.title,
-                    subServers: [{ id: firstid++, title: data.subserver }]
-                }
-            });
+    // create a Server
+    const createServer = (values) => {
+        let obj = {}
+        values.addsubserver.push(values.subserver)
+        for(let key in values.addsubserver) {
+            obj[key] = values.addsubserver[key]
         }
-        else {
-            return axios({
-                method: 'post',
-                url: 'http://localhost:3004/servers',
-                data: {
-                    title: data.title,
-                    subServers: [{ id: firstid++, title: data.subserver }]
-                }
-            }).then(axios({
-                method: 'post',
-                url: 'http://localhost:3004/servers/subServers',
-                data: {
-                    title: data.addsubserver[0],
-                    id: firstid++
-                }
-            }));
-        }
-    }
-
-    // 这块儿也有问题不会改，也交给你了。。。
-    const updateServer = (id) => {
+        var newObj = Object.keys(obj).map(val => ({
+            // generate a random subserverid
+            id: Math.ceil(Math.random() * 100),
+            title: obj[val]
+        }))
         return axios({
-            method: 'get',
-            url: 'http://localhost:3004/servers',
-            params: {
-                id: id
+            method: 'post',
+            url: 'http://localhost:3000/servers',
+            data: {
+                title: values.title,
+                subServers: newObj,
+                // these attributes should be set later
+                // status: values.modifier
+                // description: values.description
             }
         })
     }
 
-    // 这块儿好像没用。。
-    const [serverData, setServerData] = useState();
-    useEffect(() => {
-        updateServer().then(res => {
-            setServerData(res.data);
+    // update Server information
+    const updateServer = () => {
+        return axios({
+            method: 'get',
+            url: 'http://localhost:3000/servers',
         })
-    }, [])
+    }
 
     // control 'create server' button
     const [visible, setVisible] = useState(false);
@@ -312,9 +294,7 @@ const UserInfo = () => {
     const onCreate = (values) => {
         console.log('Received values of form: ', values);
         createServer(values);
-        updateServer().then(res => {
-            setServerData(res.data);
-        });
+        updateServer()
         setVisible(false);
     };
 
