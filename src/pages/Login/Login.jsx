@@ -9,8 +9,8 @@ const axios = require('axios').default;
 
 const Login = () => {
 
-  const navigate = useNavigate()
   const [form] = Form.useForm();
+  const navigate = useNavigate();
   const location = useLocation();
 
   // receive information from 'register' page

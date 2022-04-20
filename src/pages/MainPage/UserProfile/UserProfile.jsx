@@ -1,12 +1,11 @@
 import { Layout, Avatar, Modal, Menu, Tabs, Empty, Button, Typography, Radio, Input, Form, Select } from 'antd';
 import React, { useState, useEffect } from 'react'
-
+import { useOutletContext } from "react-router-dom";
 import { UserOutlined, MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import './UserProfile.css';
 
-const { Content, Sider } = Layout;
+const { Content} = Layout;
 const { Option } = Select;
-const { SubMenu } = Menu;
 const { TabPane } = Tabs;
 
 const axios = require('axios').default;
@@ -161,7 +160,6 @@ const CreateServerForm = ({ visible, onCreate, onCancel }) => {
 const ManagerServerForm = ({ managerVisible, onManager, onCancelManager }) => {
 
     const [managerform] = Form.useForm();
-
     const [subservers, setSubservers] = React.useState([]);
     const [subserver, setSubserver] = React.useState([subserverData[serverData[0]]][0]);
     const [discussions, setDiscussions] = React.useState([]);
@@ -246,15 +244,17 @@ const ManagerServerForm = ({ managerVisible, onManager, onCancelManager }) => {
 
 const UserInfo = () => {
 
-    // Get the latest server data
-    useEffect(() => {
-        updateServer()
-    }, [])
+    // use for updating when after creating a new server
+    const [status, setStatus] = useOutletContext();
+    // control 'create server' button
+    const [visible, setVisible] = useState(false);
+    // control 'manager' button
+    const [managerVisible, setmanagerVisible] = useState(false);
 
     // create a Server
     const createServer = (values) => {
         let obj = {}
-        values.addsubserver.push(values.subserver)
+        values.addsubserver.unshift(values.subserver)
         for(let key in values.addsubserver) {
             obj[key] = values.addsubserver[key]
         }
@@ -276,25 +276,13 @@ const UserInfo = () => {
         })
     }
 
-    // update Server information
-    const updateServer = () => {
-        return axios({
-            method: 'get',
-            url: 'http://localhost:3000/servers',
-        })
-    }
-
-    // control 'create server' button
-    const [visible, setVisible] = useState(false);
-
-    // control 'manager' button
-    const [managerVisible, setmanagerVisible] = useState(false);
-
     // create a new server function 
     const onCreate = (values) => {
         console.log('Received values of form: ', values);
-        createServer(values);
-        updateServer()
+        createServer(values).then(res => {
+            // this place could add more limit before the new server update
+            setStatus(true); 
+        });
         setVisible(false);
     };
 
@@ -354,7 +342,6 @@ const UserInfo = () => {
                 </Tabs>
             </Content>
         </Layout>
-
     )
 }
 

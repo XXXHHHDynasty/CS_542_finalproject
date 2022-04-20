@@ -260,6 +260,24 @@
           "title": "Videos"
         }
       ]
+    },
+    {
+      "title": "testServer",
+      "subServers": [
+        {
+          "id": 94,
+          "title": "testsubserver1"
+        },
+        {
+          "id": 74,
+          "title": "testsubserver2"
+        },
+        {
+          "id": 25,
+          "title": "testsubserver3"
+        }
+      ],
+      "id": 4
     }
   ],
   "users": [

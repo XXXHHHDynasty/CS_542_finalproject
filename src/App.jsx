@@ -5,13 +5,24 @@ import 'antd/dist/antd.min.css'
 
 const { Header, Sider } = Layout;
 const { SubMenu } = Menu;
-
 const axios = require('axios').default;
 
+
+
 const App = () => {
-    
-    const navigate = useNavigate()
+
+    const navigate = useNavigate();
     const [server, setserver] = useState([]);
+    const [status, setStatus] = useState(false);
+
+    // update menu when after creating a server
+    if (status == true) {
+        axios.get(`http://localhost:3000/servers`).then(res => {
+            setserver(res.data)
+        })
+        // close update
+        setStatus(false)
+    }
 
     // get menu
     useEffect(() => {
@@ -38,7 +49,6 @@ const App = () => {
                 }
             </SubMenu>
         )
-
     }
 
     // navigate to 'home' page
@@ -74,7 +84,6 @@ const App = () => {
                     defaultSelectedKeys={['1']}
                     defaultOpenKeys={['sub1']}
                     style={{ height: '100%', borderRight: 0 }}
-
                 >
                     {
                         server && server.map(firstItem => {
@@ -83,7 +92,7 @@ const App = () => {
                     }
                 </Menu>
             </Sider>
-            <Outlet />
+            <Outlet context={[status, setStatus]} />
         </Layout>
     )
 }
