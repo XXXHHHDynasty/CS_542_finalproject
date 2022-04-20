@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom"
+import { useNavigate, useLocation, Link } from "react-router-dom"
 import './Discussion.css';
 import { List, PageHeader, Layout, Avatar } from 'antd';
 
-const { Header, Footer, Content, Sider } = Layout;
+const { Header, Content } = Layout;
 const axios = require('axios').default;
 
 
@@ -12,26 +12,25 @@ var discussionData = [];
 const Discussion = () => {
 
     const [discussionTitle, setdiscussionTitle] = useState('')
-    const navigate = useNavigate();
-    // const { state } = useLocation();
     const location = useLocation();
-    // const { UserId } = state || {};
+    const navigate = useNavigate();
 
+    // find subserverid with serverid
     const getSubserver = (data, id) => {
         for (let item in data) {
             if (data[item].id == id) {
-                console.log(data[item], 'subservvvvvvv')
                 getDiscussion(data[item].subServers, location.state.subserverId)
             }
         }
     };
 
+    // find discussionid with subserverid
     const getDiscussion = (data, id) => {
         for (let item in data) {
             if (data[item].id == id) {
                 discussionData = data[item].discussions;
+                console.log(discussionData,'opopopopop')
                 setdiscussionTitle(data[item].title)
-                console.log(data[item], 'disucssionDaraaaaaaaaaa')
                 break;
             }
         }
@@ -40,7 +39,6 @@ const Discussion = () => {
     useEffect(() => {
         fetch(
             axios.get(`http://localhost:3000/servers`).then(res => {
-                console.log(res.data, 'testyyyy')
                 getSubserver(res.data, location.state.serverId)
             })
         )
@@ -62,9 +60,16 @@ const Discussion = () => {
                     renderItem={item => (
                         <List.Item>
                             <List.Item.Meta
+                                key={item.id}
                                 avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
-                                title={<a href="https://ant.design">{item.title}</a>}
+                                title={<Link to={{
+                                    pathname: "/home",
+                                    state: { discussionId: item.id }
+                                }}>{item.title}</Link>}
                                 description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+                                onClick={() => {
+                                    navigate("/home", { state: { title: item.title } })
+                                }}
                             />
                         </List.Item>
                     )}

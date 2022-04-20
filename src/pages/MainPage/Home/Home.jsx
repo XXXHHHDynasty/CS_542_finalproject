@@ -1,6 +1,7 @@
 import React, { createElement, useState, useEffect } from 'react';
 import './home.css';
-import { Layout, Menu, Input, Button, Comment, Avatar, Tooltip, List } from 'antd';
+import { useLocation } from "react-router-dom"
+import { Layout, Input, Button, Comment, Avatar, Tooltip, List, PageHeader } from 'antd';
 import { DislikeOutlined, LikeOutlined, DislikeFilled, LikeFilled } from '@ant-design/icons';
 
 const { Header, Footer, Content, Sider } = Layout;
@@ -25,7 +26,7 @@ const updateContents = (id) => {
     return axios({
         method: 'get',
         url: 'http://localhost:3000/posts',
-        params:{
+        params: {
             id: id
         }
     })
@@ -33,43 +34,53 @@ const updateContents = (id) => {
 
 const Home = () => {
 
+    const location = useLocation();
     // everytime refresh page will get all post contents
     useEffect(() => {
-        updateContents().then(res => {
-            setData(res.data);
-        })
-    }, []);
-    
+        fetch(
+            updateContents().then(res => {
+                setData(res.data);
+            })
+        )
+    }, [location.state]);
+
     const [postMessage, setPost] = useState('');
     const [data, setData] = useState('');
     const [likes, setLikes] = useState(0);
     const [dislikes, setDislikes] = useState(0);
     const [action, setAction] = useState(null);
-    
+
     const like = (id) => {
-        console.log(id,'userID');
+        console.log(id, 'userID');
         updateContents(id).then(res => {
             // update the new data
             console.log(res);
         });
         setLikes(likes + 1);
         setAction('liked');
-      };
-    
+    };
+
     const dislike = (id) => {
         updateContents(id).then(res => {
             console.log(res.data);
         });
         setDislikes(dislikes + 1);
         setAction('disliked');
-      };
+    };
 
     return (
         <Layout className="site-layout" style={{ marginLeft: 200 }}>
-            <Header className="site-layout-background" style={{ padding: 0 }} />
-            <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
+            <Header />
+            <Content>
+            <PageHeader
+                    className="site-page-header"
+                    onBack={() => window.history.go(-2)}
+                    title={location.state.title}
+                    subTitle="This is a subtitle"
+                />
                 <div className="submit">
                     <List
+                        style={{ backgroundColor: '#FFFFFF', padding: 30 }}
                         className="comment-list"
                         header={`${data.length} replies`}
                         itemLayout="horizontal"
