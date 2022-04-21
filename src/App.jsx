@@ -56,7 +56,7 @@ const App = () => {
 
     // navigate to 'home' page
     const goHome = () => {
-        navigate('/home', {})
+        navigate('/', {})
     }
 
     // navigate to 'UserProfile' page
