@@ -28,7 +28,7 @@ const Login = () => {
 
   // naviagte to 'Home' Page
   const goHome = (username) => {
-    navigate('/home', { username })
+    navigate('/', { username })
   }
 
   // submit users' information & naviagte to 'Home' page
