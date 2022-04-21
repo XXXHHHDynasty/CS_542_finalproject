@@ -13,7 +13,7 @@ const App = () => {
 
     const navigate = useNavigate();
     const [server, setserver] = useState([]);
-    const [subserver, setsubserver] = useState([]);
+    const [current, setCurrent] = useState("1");
     const [status, setStatus] = useState(false);
 
     // update menu when after creating a server
@@ -43,6 +43,7 @@ const App = () => {
     const renderSubMnenu = (value) => {
         return (
             <SubMenu key={value.id} title={value.title} onClick={(item) => {
+                setCurrent("1")
                 navigate("/discussion", {state:{ subserverId: item.key } })
             }}>
                 {
@@ -62,12 +63,13 @@ const App = () => {
     // navigate to 'UserProfile' page
     const goUserProfile = () => {
         navigate('/userprofile', {})
+        setCurrent("2")
     }
 
     return (
         <Layout>
             <Header className="header" style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
-                <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
+                <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']} selectedKeys={[current]}>
                     <Menu.Item key="1" onClick={goHome}>Home</Menu.Item>
                     <Menu.Item key="2" onClick={goUserProfile}>User Profile</Menu.Item>
                 </Menu>
