@@ -253,36 +253,38 @@ const UserInfo = () => {
 
     // create a Server
     const createServer = (values) => {
-        let obj = {}
         values.addsubserver.unshift(values.subserver)
-        for(let key in values.addsubserver) {
-            obj[key] = values.addsubserver[key]
-        }
-        var newObj = Object.keys(obj).map(val => ({
-            // generate a random subserverid
-            id: Math.ceil(Math.random() * 100),
-            title: obj[val]
-        }))
-        return axios({
-            method: 'post',
-            url: 'http://localhost:3000/servers',
-            data: {
-                title: values.title,
-                subServers: newObj,
-                // these attributes should be set later
-                // status: values.modifier
-                // description: values.description
+        axios.post(`http://localhost:3000/servers`, {
+            title: values.title,
+            // description: values.description
+        }).then(res => {
+            console.log(res,'make at tesst')
+            for(let key in values.addsubserver) {
+                axios.post(`http://localhost:3000/subservers`, {
+                    title: values.addsubserver[key],
+                    serverId: res.data.id
+                })
             }
         })
     }
 
     // create a new server function 
     const onCreate = (values) => {
-        console.log('Received values of form: ', values);
-        createServer(values).then(res => {
-            // this place could add more limit before the new server update
-            setStatus(true); 
-        });
+        values.addsubserver.unshift(values.subserver)
+        axios.post(`http://localhost:3000/servers`, {
+            title: values.title,
+            // this place could add more attributes
+            // description: values.description
+        }).then(res => {
+            console.log(res,'make at tesst')
+            for(let key in values.addsubserver) {
+                axios.post(`http://localhost:3000/subservers`, {
+                    title: values.addsubserver[key],
+                    serverId: res.data.id
+                })
+            }
+        })
+        setStatus(true); 
         setVisible(false);
     };
 

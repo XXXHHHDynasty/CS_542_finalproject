@@ -73,7 +73,7 @@ const Home = () => {
             <Header />
             <Content>
             <PageHeader
-                    className="site-page-header"
+                    className='site-page-header-responsive'
                     onBack={() => window.history.go(-2)}
                     title={location.state.title}
                     subTitle="This is a subtitle"

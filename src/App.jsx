@@ -13,11 +13,12 @@ const App = () => {
 
     const navigate = useNavigate();
     const [server, setserver] = useState([]);
+    const [subserver, setsubserver] = useState([]);
     const [status, setStatus] = useState(false);
 
     // update menu when after creating a server
     if (status == true) {
-        axios.get(`http://localhost:3000/servers`).then(res => {
+        axios.get(`http://localhost:3000/servers?_embed=subservers`).then(res => {
             setserver(res.data)
         })
         // close update
@@ -26,7 +27,7 @@ const App = () => {
 
     // get menu
     useEffect(() => {
-        axios.get(`http://localhost:3000/servers`).then(res => {
+        axios.get(`http://localhost:3000/servers?_embed=subservers`).then(res => {
             setserver(res.data)
         })
     }, []);
@@ -42,11 +43,11 @@ const App = () => {
     const renderSubMnenu = (value) => {
         return (
             <SubMenu key={value.id} title={value.title} onClick={(item) => {
-                navigate("/discussion", {state:{ serverId: item.keyPath[1], subserverId: item.key } })
+                navigate("/discussion", {state:{ subserverId: item.key } })
             }}>
                 {
-                    value.subServers && value.subServers.map(item => {
-                        return item.subServers && item.subServers.length > 0 ? renderSubMnenu(item) : renderMenu(item)
+                    value.subservers && value.subservers.map(item => {
+                        return item.subservers && item.subservers.length > 0 ? renderSubMnenu(item) : renderMenu(item)
                     })
                 }
             </SubMenu>
@@ -86,7 +87,7 @@ const App = () => {
                 >
                     {
                         server && server.map(firstItem => {
-                            return firstItem.subServers && firstItem.subServers.length > 0 ? renderSubMnenu(firstItem) : renderMenu(firstItem)
+                            return firstItem.subservers && firstItem.subservers.length > 0 ? renderSubMnenu(firstItem) : renderMenu(firstItem)
                         })
                     }
                 </Menu>

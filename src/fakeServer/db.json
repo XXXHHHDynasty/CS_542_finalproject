@@ -176,304 +176,24 @@
       "postId": 1
     },
     {
+      "id": 2,
       "body": "testBody",
-      "postID": "testID",
-      "id": 2
+      "postId": 2
     },
     {
       "body": "testBody",
-      "postID": "testID",
+      "postId": 3,
       "id": 3
     },
     {
       "body": "testBody",
-      "postID": "testID",
+      "postId": 4,
       "id": 4
     }
   ],
   "profile": {
     "name": "typicode"
   },
-  "servers": [
-    {
-      "id": 1,
-      "userid": 111,
-      "title": "WPI Lifestyle",
-      "subServers": [
-        {
-          "id": 989,
-          "title": "Free chatting",
-          "discussions":[
-            {
-              "id": 800,
-              "title": "How to improve canteen meals",
-              "description": "some description about food"
-            },
-            {
-              "id": 801,
-              "title": "How to improve canteen meals",
-              "description": "some description about food"
-            },
-            {
-              "id": 802,
-              "title": "How to improve canteen meals",
-              "description": "some description about food"
-            },
-            {
-              "id": 803,
-              "title": "How to improve canteen meals",
-              "description": "some description about food"
-            },
-            {
-              "id": 804,
-              "title": "How to improve canteen meals",
-              "description": "some description about food"
-            },
-            {
-              "id": 805,
-              "title": "How to improve canteen meals",
-              "description": "some description about food"
-            },
-            {
-              "id": 806,
-              "title": "How to improve canteen meals",
-              "description": "some description about food"
-            }
-          ]
-        },
-        {
-          "id": 1990,
-          "title": "Foods",
-          "discussions": [
-            {
-              "id": 807,
-              "title": "How to improve canteen meals",
-              "description": "some description about food"
-            },
-            {
-              "id": 808,
-              "title": "How to improve canteen meals",
-              "description": "some description about food"
-            },
-            {
-              "id": 809,
-              "title": "How to improve canteen meals",
-              "description": "some description about food"
-            },
-            {
-              "id": 810,
-              "title": "How to improve canteen meals",
-              "description": "some description about food"
-            },
-            {
-              "id": 811,
-              "title": "How to improve canteen meals",
-              "description": "some description about food"
-            },
-            {
-              "id": 812,
-              "title": "How to improve canteen meals",
-              "description": "some description about food"
-            },
-            {
-              "id": 813,
-              "title": "How to improve canteen meals",
-              "description": "some description about food"
-            }
-          ]
-        },
-        {
-          "id": 991,
-          "title": "Games",
-          "discussions":[]
-        },
-        {
-          "id": 992,
-          "title": "Sports",
-          "discussions":[]
-        },
-        {
-          "id": 993,
-          "title": "Musics",
-          "discussions":[]
-        }
-      ]
-    },
-    {
-      "id": 2,
-      "userid": 222,
-      "title": "WPI Study",
-      "subServers": [
-        {
-          "id": 994,
-          "title": "Welcome",
-          "discussions":[
-            {
-              "id": 814,
-              "title": "How to improve canteen meals",
-              "description": "some description about food"
-            },
-            {
-              "id": 815,
-              "title": "How to improve canteen meals",
-              "description": "some description about food"
-            },
-            {
-              "id": 816,
-              "title": "How to improve canteen meals",
-              "description": "some description about food"
-            }
-          ]
-        },
-        {
-          "id": 995,
-          "title": "Courses",
-          "discussions":[
-            {
-            "id": 817,
-            "title": "How to improve canteen meals",
-            "description": "some description about food"
-          },
-          {
-            "id": 818,
-            "title": "How to improve canteen meals",
-            "description": "some description about food"
-          },
-          {
-            "id": 819,
-            "title": "How to improve canteen meals",
-            "description": "some description about food"
-          }]
-        },
-        {
-          "id": 996,
-          "title": "Project help",
-          "discussions":[
-            {
-              "id": 820,
-              "title": "How to improve canteen meals",
-              "description": "some description about food"
-            },
-            {
-              "id": 821,
-              "title": "How to improve canteen meals",
-              "description": "some description about food"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": 3,
-      "userid": 333,
-      "title": "Fun things sharing place",
-      "subServers": [
-        {
-          "id": 997,
-          "title": "Free chatting",
-          "discussions":[
-            {
-              "id": 822,
-              "title": "How to improve canteen meals",
-              "description": "some description about food"
-            },
-            {
-              "id": 823,
-              "title": "How to improve canteen meals",
-              "description": "some description about food"
-            }
-          ]
-        },
-        {
-          "id": 998,
-          "title": "Memes",
-          "discussions":[
-            {
-              "id": 824,
-              "title": "How to improve canteen meals",
-              "description": "some description about food"
-            },
-            {
-              "id": 825,
-              "title": "How to improve canteen meals",
-              "description": "some description about food"
-            }
-          ]
-        },
-        {
-          "id": 999,
-          "title": "Pictures",
-          "discussions":[
-            {
-              "id": 826,
-              "title": "How to improve canteen meals",
-              "description": "some description about food"
-            },
-            {
-              "id": 827,
-              "title": "How to improve canteen meals",
-              "description": "some description about food"
-            }
-          ]
-        },
-        {
-          "id": 1000,
-          "title": "Videos",
-          "discussions":[
-            {
-              "id": 828,
-              "title": "How to improve canteen meals",
-              "description": "some description about food"
-            },
-            {
-              "id": 829,
-              "title": "How to improve canteen meals",
-              "description": "some description about food"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "title": "testServer",
-      "userid": 444,
-      "subServers": [
-        {
-          "id": 94,
-          "title": "testsubserver1",
-          "discussions":[
-            {
-              "id": 824,
-              "title": "How to improve canteen meals",
-              "description": "some description about food"
-            },
-            {
-              "id": 825,
-              "title": "How to improve canteen meals",
-              "description": "some description about food"
-            }
-          ]
-        },
-        {
-          "id": 74,
-          "title": "testsubserver2",
-          "discussions":[
-            {
-              "id": 826,
-              "title": "How to improve canteen meals",
-              "description": "some description about food"
-            },
-            {
-              "id": 827,
-              "title": "How to improve canteen meals",
-              "description": "some description about food"
-            }
-          ]
-        }
-      ],
-      "id": 4
-    }
-  ],
   "users": [
     {
       "id": 1,
@@ -510,6 +230,206 @@
       "password": "123",
       "remember": true,
       "id": 6
+    }
+  ],
+  "servers": [
+    {
+      "id": 1,
+      "title": "WPI Lifestyle"
+    },
+    {
+      "id": 2,
+      "title": "WPI Study"
+    },
+    {
+      "id": 3,
+      "title": "Fun things sharing place"
+    },
+    {
+      "title": "my first server",
+      "id": 4
+    },
+    {
+      "title": "my second server",
+      "id": 5
+    }
+  ],
+  "subservers": [
+    {
+      "id": 14,
+      "title": "Free Chatting",
+      "serverId": 1
+    },
+    {
+      "id": 15,
+      "title": "Foods",
+      "serverId": 1
+    },
+    {
+      "id": 16,
+      "title": "Games",
+      "serverId": 1
+    },
+    {
+      "id": 17,
+      "title": "Sports",
+      "serverId": 1
+    },
+    {
+      "id": 18,
+      "title": "Musics",
+      "serverId": 1
+    },
+    {
+      "id": 19,
+      "title": "Welcome",
+      "serverId": 2
+    },
+    {
+      "id": 20,
+      "title": "Courses",
+      "serverId": 2
+    },
+    {
+      "id": 21,
+      "title": "Project help",
+      "serverId": 2
+    },
+    {
+      "id": 22,
+      "title": "Free Chatting",
+      "serverId": 3
+    },
+    {
+      "id": 23,
+      "title": "Memes",
+      "serverId": 3
+    },
+    {
+      "id": 24,
+      "title": "Pictures",
+      "serverId": 3
+    },
+    {
+      "id": 25,
+      "title": "Videos",
+      "serverId": 3
+    },
+    {
+      "title": "sub1",
+      "serverId": 4,
+      "id": 26
+    },
+    {
+      "title": "Nintendo",
+      "serverId": 4,
+      "id": 27
+    },
+    {
+      "title": "Sony",
+      "serverId": 4,
+      "id": 28
+    },
+    {
+      "title": "programming",
+      "serverId": 5,
+      "id": 29
+    },
+    {
+      "title": "Java",
+      "serverId": 5,
+      "id": 30
+    },
+    {
+      "title": "react",
+      "serverId": 5,
+      "id": 31
+    }
+  ],
+  "discussions": [
+    {
+      "id": 56,
+      "title": "How to improve canteen meals",
+      "description": "some description about food",
+      "subserverId": 14
+    },
+    {
+      "id": 57,
+      "title": "How to get canteen meals",
+      "description": "some description about food",
+      "subserverId": 14
+    },
+    {
+      "id": 58,
+      "title": "How to delete canteen meals",
+      "description": "some description about food",
+      "subserverId": 16
+    },
+    {
+      "id": 59,
+      "title": "What to improve canteen meals",
+      "description": "some description about food",
+      "subserverId": 16
+    },
+    {
+      "id": 60,
+      "title": "What to get canteen meals",
+      "description": "some description about food",
+      "subserverId": 18
+    },
+    {
+      "id": 61,
+      "title": "What to delete canteen meals",
+      "description": "some description about food",
+      "subserverId": 18
+    },
+    {
+      "id": 62,
+      "title": "Where to improve canteen meals",
+      "description": "some description about food",
+      "subserverId": 19
+    },
+    {
+      "id": 63,
+      "title": "Where to get canteen meals",
+      "description": "some description about food",
+      "subserverId": 19
+    },
+    {
+      "id": 64,
+      "title": "Where to delete canteen meals",
+      "description": "some description about food",
+      "subserverId": 19
+    },
+    {
+      "subserverId": 24,
+      "title": "I finished it!",
+      "description": "this is a good news",
+      "id": 65
+    },
+    {
+      "subserverId": 24,
+      "title": "the project will be better",
+      "description": "I am working",
+      "id": 66
+    },
+    {
+      "subserverId": 24,
+      "title": "this time I will be successed",
+      "description": "Please!!!",
+      "id": 67
+    },
+    {
+      "subserverId": 26,
+      "title": "Let's play games",
+      "description": "good games",
+      "id": 68
+    },
+    {
+      "subserverId": 17,
+      "title": "football",
+      "description": "football is a great game",
+      "id": 69
     }
   ]
 }
