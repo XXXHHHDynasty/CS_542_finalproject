@@ -76,7 +76,6 @@ const Home = () => {
                     className='site-page-header-responsive'
                     onBack={() => window.history.go(-2)}
                     title={location.state.title}
-                    subTitle="This is a subtitle"
                 />
                 <div className="submit">
                     <List
@@ -112,13 +111,13 @@ const Home = () => {
                     />
                     <div className='postSubmit'>
                         <Input
-                            style={{ width: '90%' }}
+                            style={{ width: '92%' }}
                             value={postMessage}
                             onChange={event => {
                                 setPost(event.target.value);
                             }}>
                         </Input>
-                        <Button type="primary" onClick={() => {
+                        <Button type="primary" style={{ height: '100%' }} onClick={() => {
                             pushContents(postMessage).then(res => {
                             })
                             updateContents().then(res => {

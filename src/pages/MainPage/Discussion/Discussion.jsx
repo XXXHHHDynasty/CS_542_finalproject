@@ -97,7 +97,6 @@ const Discussion = () => {
                 <PageHeader
                     style={{ backgroundColor: '#f5f5f5' }}
                     title={discussionTitle}
-                    subTitle="This is a subtitle"
                     extra={
                         <Button key='1' type="primary" onClick={() => {
                             setVisible(true);
@@ -126,7 +125,7 @@ const Discussion = () => {
                                     pathname: "/home",
                                     state: { discussionId: item.id }
                                 }}>{item.title}</Link>}
-                                description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+                                description={item.description}
                                 onClick={() => {
                                     navigate("/home", { state: { title: item.title } })
                                 }}

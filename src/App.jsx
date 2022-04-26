@@ -62,8 +62,8 @@ const App = () => {
 
     // navigate to 'UserProfile' page
     const goUserProfile = () => {
-        navigate('/userprofile', {})
         setCurrent("2")
+        navigate('/userprofile', {})
     }
 
     return (
