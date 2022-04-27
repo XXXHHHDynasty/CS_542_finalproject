@@ -58,7 +58,7 @@ const App = () => {
     // navigate to 'home' page
     const goHome = () => {
         setCurrent("1")
-        navigate('/', {})
+        navigate('/empty', {})
     }
 
     // navigate to 'UserProfile' page
