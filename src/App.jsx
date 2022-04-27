@@ -8,7 +8,6 @@ const { SubMenu } = Menu;
 const axios = require('axios').default;
 
 
-
 const App = () => {
 
     const navigate = useNavigate();
@@ -20,9 +19,10 @@ const App = () => {
     if (status == true) {
         axios.get(`http://localhost:3000/servers?_embed=subservers`).then(res => {
             setserver(res.data)
+        }).then(() => {
+            // close update
+            setStatus(false)
         })
-        // close update
-        setStatus(false)
     }
 
     // get menu

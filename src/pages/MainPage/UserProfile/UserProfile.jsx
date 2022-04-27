@@ -10,30 +10,6 @@ const { TabPane } = Tabs;
 
 const axios = require('axios').default;
 
-// 你的manage form代码要大改才能运行
-
-// const getServerData = async () => {
-//     const res = await axios(
-//         'http://localhost:3004/servers',
-//         {
-//             method: 'get',
-//         },
-//     );
-//     return res;
-// }
-
-// const getServerInfo = () => {
-//     const serverTitle = [];
-//     getServerData().then(res => {
-//         const len = res.data.length;
-//         for(let i = 0; i < len; i ++){
-//             serverTitle.fill(res.data[i].title);
-//         }
-//     })
-//     return serverTitle;
-// }
-
-// const serverData = getServerInfo();
 const serverData = ['Server1', 'Server2'];
 const subserverData = {
     Server1: ['subserver1', 'subserver2', 'subserver3'],
@@ -251,32 +227,15 @@ const UserInfo = () => {
     // control 'manager' button
     const [managerVisible, setmanagerVisible] = useState(false);
 
-    // create a Server
-    const createServer = (values) => {
-        values.addsubserver.unshift(values.subserver)
-        axios.post(`http://localhost:3000/servers`, {
-            title: values.title,
-            // description: values.description
-        }).then(res => {
-            console.log(res,'make at tesst')
-            for(let key in values.addsubserver) {
-                axios.post(`http://localhost:3000/subservers`, {
-                    title: values.addsubserver[key],
-                    serverId: res.data.id
-                })
-            }
-        })
-    }
-
     // create a new server function 
     const onCreate = (values) => {
-        values.addsubserver.unshift(values.subserver)
+        console.log(values)
+        if(values.addsubserver) {
+            values.addsubserver.unshift(values.subserver)
+        }
         axios.post(`http://localhost:3000/servers`, {
-            title: values.title,
-            // this place could add more attributes
-            // description: values.description
+            title: values.title
         }).then(res => {
-            console.log(res,'make at tesst')
             for(let key in values.addsubserver) {
                 axios.post(`http://localhost:3000/subservers`, {
                     title: values.addsubserver[key],
@@ -320,7 +279,6 @@ const UserInfo = () => {
                     />
                     <Button className='flexstyleColumn' type="primary" danger style={{ marginLeft: 10 }} onClick={() => {
                         setmanagerVisible(true);
-                        // getServerData().then(res => (console.log(res.data[1].title)))
                     }}>Delete Server</Button>
                     <ManagerServerForm
                         managerVisible={managerVisible}
