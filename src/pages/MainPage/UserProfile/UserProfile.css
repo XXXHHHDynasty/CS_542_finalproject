@@ -30,6 +30,11 @@
     flex-direction: column;
     justify-content: center;
 }
+.commentsShow {
+    height: 300px;
+    overflow: auto;
+    background-color: #F0F2F5;
+}
 
 .ant-form-item-control-input-content {
     display: flex;

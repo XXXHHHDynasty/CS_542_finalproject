@@ -1,6 +1,6 @@
-import { Layout, Avatar, Modal, Menu, Tabs, Empty, Button, Typography, Radio, Input, Form, Select } from 'antd';
-import React, { useState } from 'react'
-import { useOutletContext } from "react-router-dom";
+import { Layout, Avatar, Modal, List, Tabs, Empty, Button, Typography, Radio, Input, Form, Select, Comment } from 'antd';
+import React, { useState, useEffect } from 'react'
+import { useOutletContext, Link, useNavigate } from "react-router-dom";
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import './UserProfile.css';
 
@@ -124,7 +124,7 @@ const CreateServerForm = ({ visible, onCreate, onCancel }) => {
 
 // manager server form component
 const ManagerServerForm = ({ managerVisible, onManager, servers, onCancelManager }) => {
-    
+
     const [subservers, setSubservers] = useState([]);
     const [discussions, setDiscussions] = useState([]);
     const [managerform] = Form.useForm();
@@ -215,10 +215,25 @@ const UserInfo = () => {
     const [visible, setVisible] = useState(false);
     // control 'manager' button
     const [managerVisible, setmanagerVisible] = useState(false);
+    // saved discussions
+    const [savedDiscussions, setSavedDiscussions] = useState([]);
+    // saved comments
+    const [savedComments, setSavedComments] = useState([])
+    // user name
+    const [name, setName] = useState('Olivia')
 
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        axios.get(`http://localhost:3000/savedDiscussions`).then(res => {
+            setSavedDiscussions(res.data)
+        })
+        axios.get(`http://localhost:3000/savedComments`).then(res => {
+            setSavedComments(res.data)
+        })
+    }, []);
     // create a new server function 
     const onCreate = (values) => {
-        console.log(values)
         if (values.addsubserver) {
             values.addsubserver.unshift(values.subserver)
         }
@@ -238,9 +253,7 @@ const UserInfo = () => {
 
     // delete discussion
     const onManager = (values) => {
-        axios.delete(`http://localhost:3000/discussions/${values.delDiscussion}`).then(res => {
-            console.log(res,'delete')
-        })
+        axios.delete(`http://localhost:3000/discussions/${values.delDiscussion}`)
         setStatus(true);
         setmanagerVisible(false);
     };
@@ -259,8 +272,8 @@ const UserInfo = () => {
                 <div className="flexstyleRow">
                     <Avatar size={100} src="https://joeschmoe.io/api/v1/random" style={{ marginLeft: 20 }}>Olivia</Avatar>
                     <div className='flexstyleColumn' style={{ marginLeft: 20 }}>
-                        <Typography.Title editable level={3} style={{ margin: 0, color: '#333' }}>
-                            Olivia
+                        <Typography.Title editable={{ onChange: setName }} level={3} style={{ margin: 0, color: '#333' }}>
+                            {name}
                         </Typography.Title>
                         <p style={{ marginBottom: 0, color: '#666' }}>Follow:100</p>
                         <p style={{ marginBottom: 0, color: '#666' }}>Follower:100</p>
@@ -288,15 +301,50 @@ const UserInfo = () => {
                 </div>
             </div>
             <Content style={{ margin: '24px 16px 0', overflow: 'initial', backgroundColor: '#FFF' }}>
-                <Tabs defaultActiveKey="1" style={{ paddingLeft: 30, paddingTop: 15 }}>
-                    <TabPane tab="Saved Servers" key="1">
-                        <Empty />
+                <Tabs defaultActiveKey="1" style={{ padding: '20px 20px 0 20px' }}>
+                    <TabPane tab="Saved Discusstions" key="1">
+                        <div className='commentsShow' style={{background: 'white'}}>
+                            <List
+                                style={{ backgroundColor: 'white', borderRadius: 5 }}
+                                bordered
+                                dataSource={savedDiscussions}
+                                renderItem={item => (
+                                    <List.Item>
+                                        <List.Item.Meta
+                                            key={item.id}
+                                            avatar={<Avatar src={item.src} />}
+                                            title={<Link to={{
+                                                pathname: "/home",
+                                                state: { discussionId: item.id }
+                                            }}>{item.title}</Link>}
+                                            description={item.description}
+                                            onClick={() => {
+                                                navigate("/home", { state: { title: item.title, id: item.id } })
+                                            }}
+                                        />
+                                    </List.Item>
+                                )}
+                            />
+                        </div>
                     </TabPane>
-                    <TabPane tab="Saved Discusstions" key="2">
-                        <Empty />
-                    </TabPane>
-                    <TabPane tab="Saved Comments" key="3">
-                        <Empty />
+                    <TabPane tab="Saved Comments" key="2">
+                        <div className="commentsShow">
+                            <List
+                                style={{ backgroundColor: '#FFFFFF', padding: 30 }}
+                                className="comment-list"
+                                itemLayout="horizontal"
+                                dataSource={savedComments}
+                                renderItem={item => (
+                                    <li>
+                                        <Comment
+                                            avatar={<Avatar src={item.src} />}
+                                            author={item.author}
+                                            content={item.msg}
+                                        />
+                                    </li>
+                                )}
+                            />
+                        </div>
                     </TabPane>
                 </Tabs>
             </Content>

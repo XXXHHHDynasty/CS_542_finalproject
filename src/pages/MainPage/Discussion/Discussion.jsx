@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom"
 import './Discussion.css';
 import { List, PageHeader, Layout, Avatar, Button, Form, Modal, Input } from 'antd';
+import { StarOutlined } from '@ant-design/icons';
 
 const { Header, Content } = Layout;
 const axios = require('axios').default;
@@ -88,6 +89,14 @@ const Discussion = () => {
         })
         setVisible(false);
     };
+    // save discussion
+    const saveDiscussion = (values) => {
+        axios.post(`http://localhost:3000/savedDiscussions`, {
+            subserverId: values.subserverId,
+            title: values.title,
+            description: values.description
+        }) 
+    }
 
     return (
         <Layout style={{ marginLeft: 200 }}>
@@ -97,11 +106,15 @@ const Discussion = () => {
                     style={{ backgroundColor: '#f5f5f5' }}
                     title={discussionTitle}
                     extra={
-                        <Button key='1' type="primary" onClick={() => {
+                        [<Button key='1' type="primary" onClick={() => {
                             setVisible(true);
-                        }} >
+                        }}>
                             add discussion
-                        </Button>
+                        </Button>,
+                        <Button key='2' icon={<StarOutlined />} size="small" style={{ border: 0, backgroundColor: '#f5f5f5' }} onClick={() => {
+                            // SaveServer(item)
+                        }}></Button>
+                        ]
                     }
                 />
                 <AddDiscussionForm
@@ -129,6 +142,10 @@ const Discussion = () => {
                                     navigate("/home", { state: { title: item.title, id: item.id } })
                                 }}
                             />
+                            <Button icon={<StarOutlined />} size="small" style={{ border: 0 }} onClick={() => {
+                                saveDiscussion(item)
+                                console.log(item, 'saveeeeee')
+                            }}></Button>
                         </List.Item>
                     )}
                 />

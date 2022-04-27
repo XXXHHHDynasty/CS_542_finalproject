@@ -1,9 +1,9 @@
 import React, { createElement, useState, useEffect } from 'react';
 import './home.css';
 import { useLocation } from "react-router-dom"
-import { Layout, Input, Button, Comment, Avatar, Tooltip, List, PageHeader, Skeleton, Divider } from 'antd';
-import { DislikeOutlined, LikeOutlined, DislikeFilled, LikeFilled } from '@ant-design/icons';
-
+import { Layout, Input, Button, Comment, Avatar, Tooltip, List, PageHeader, Divider } from 'antd';
+import { DislikeOutlined, LikeOutlined } from '@ant-design/icons';
+import { StarOutlined } from '@ant-design/icons';
 const { Header, Footer, Content, Sider } = Layout;
 
 const axios = require('axios').default;
@@ -31,7 +31,7 @@ const Home = () => {
             likes: item.likes + 1,
             dislikes: item.dislikes
         }).then(res => {
-            loadData()       
+            loadData()
         })
     };
 
@@ -45,10 +45,21 @@ const Home = () => {
             likes: item.likes,
             dislikes: item.dislikes + 1
         }).then(res => {
-            loadData()       
+            loadData()
         })
     };
-
+    const SaveComment = (item) => {
+        console.log(item)
+        axios.post(`http://localhost:3000/savedComments`, {
+            title: item.title,
+            author: item.author,
+            msg: item.msg,
+            src: item.src,
+            discussionId: item.discussionId,
+            likes: item.likes,
+            dislikes: item.dislikes
+        })
+    }
     const loadData = () => {
         fetch(axios.get(`http://localhost:3000/discussions/${location.state.id}?_embed=posts`)
             .then(res => {
@@ -83,41 +94,48 @@ const Home = () => {
                     title={location.state.title}
                 />
                 <div className="submit">
-                        <List
-                            style={{ backgroundColor: '#FFFFFF', padding: 30 }}
-                            className="comment-list"
-                            header={`${data.length} replies`}
-                            itemLayout="horizontal"
-                            dataSource={data}
-                            renderItem={item => (
-                                <li>
-                                    <Comment
-                                        actions={[
-                                            <Tooltip key="comment-basic-like" title="Like">
-                                                <span>
-                                                    <Button icon={<LikeOutlined />} size="small" style={{border:0}} onClick={() => {
-                                                        clickLike(item)
-                                                    }}></Button>
-                                                    <span className="comment-action">{item.likes}</span>
-                                                </span>
-                                            </Tooltip>,
-                                            <Tooltip key="comment-basic-dislike" title="Dislike">
-                                                <span key={item.id}>
-                                                    <Button icon={<DislikeOutlined />} size="small" style={{border:0}} onClick={() => {
-                                                        clickDislike(item)
-                                                    }}></Button>
-                                                    <span className="comment-action">{item.dislikes}</span>
-                                                </span>
-                                            </Tooltip>,
-                                        ]}
-                                        avatar={<Avatar src={item.src} />}
-                                        author={item.author}
-                                        content={item.msg}
-                                    />
-                                </li>
-                            )}
-                        />
-                        <Divider plain>It is all, nothing more 🤐</Divider>
+                    <List
+                        style={{ backgroundColor: '#FFFFFF', padding: 30 }}
+                        className="comment-list"
+                        header={`${data.length} replies`}
+                        itemLayout="horizontal"
+                        dataSource={data}
+                        renderItem={item => (
+                            <li>
+                                <Comment
+                                    actions={[
+                                        <Tooltip key="comment-basic-like" title="Like">
+                                            <span>
+                                                <Button icon={<LikeOutlined />} size="small" style={{ border: 0 }} onClick={() => {
+                                                    clickLike(item)
+                                                }}></Button>
+                                                <span className="comment-action">{item.likes}</span>
+                                            </span>
+                                        </Tooltip>,
+                                        <Tooltip key="comment-basic-dislike" title="Dislike">
+                                            <span>
+                                                <Button icon={<DislikeOutlined />} size="small" style={{ border: 0 }} onClick={() => {
+                                                    clickDislike(item)
+                                                }}></Button>
+                                                <span className="comment-action">{item.dislikes}</span>
+                                            </span>
+                                        </Tooltip>,
+                                        <Tooltip title="Save">
+                                            <span>
+                                                <Button icon={<StarOutlined />} size="small" style={{ border: 0 }} onClick={() => {
+                                                    SaveComment(item)
+                                                }}></Button>
+                                            </span>
+                                        </Tooltip>
+                                    ]}
+                                    avatar={<Avatar src={item.src} />}
+                                    author={item.author}
+                                    content={item.msg}
+                                />
+                            </li>
+                        )}
+                    />
+                    <Divider plain>It is all, nothing more 🤐</Divider>
                 </div>
                 <div className='postSubmit'>
                     <Input

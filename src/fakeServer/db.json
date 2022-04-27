@@ -17,7 +17,7 @@
       "src": "https://joeschmoe.io/api/v1/random",
       "discussionId": 56,
       "likes": 7,
-      "dislikes": 7,
+      "dislikes": 8,
       "id": 2
     },
     {
@@ -433,6 +433,82 @@
       "title": "football",
       "description": "football is a great game",
       "id": 69
+    }
+  ],
+  "savedServers": [],
+  "savedComments": [
+    {
+      "title": "json-server",
+      "author": "typicode",
+      "msg": "123",
+      "src": "https://joeschmoe.io/api/v1/random",
+      "discussionId": 56,
+      "likes": 8,
+      "dislikes": 7,
+      "id": 1
+    },
+    {
+      "title": "json-server",
+      "author": "typicode",
+      "msg": "123",
+      "src": "https://joeschmoe.io/api/v1/random",
+      "discussionId": 56,
+      "likes": 7,
+      "dislikes": 8,
+      "id": 2
+    },
+    {
+      "title": "testTitle",
+      "author": "testAuthor",
+      "msg": "123",
+      "src": "https://joeschmoe.io/api/v1/random",
+      "discussionId": 56,
+      "likes": 2,
+      "dislikes": 3,
+      "id": 3
+    },
+    {
+      "title": "testTitle",
+      "author": "testAuthor",
+      "msg": "123",
+      "src": "https://joeschmoe.io/api/v1/random",
+      "discussionId": 56,
+      "likes": 3,
+      "dislikes": 1,
+      "id": 4
+    },
+    {
+      "title": "testTitle",
+      "author": "testAuthor",
+      "msg": "123",
+      "src": "https://joeschmoe.io/api/v1/random",
+      "discussionId": 56,
+      "likes": 3,
+      "dislikes": 1,
+      "id": 5
+    },
+    {
+      "title": "testTitle",
+      "author": "testAuthor",
+      "msg": "123",
+      "discussionId": 59,
+      "likes": 0,
+      "dislikes": 0,
+      "id": 6
+    }
+  ],
+  "savedDiscussions": [
+    {
+      "subserverId": 14,
+      "title": "How to improve canteen meals",
+      "description": "some description about food",
+      "id": 1
+    },
+    {
+      "subserverId": 19,
+      "title": "Where to improve canteen meals",
+      "description": "some description about food",
+      "id": 2
     }
   ]
 }
