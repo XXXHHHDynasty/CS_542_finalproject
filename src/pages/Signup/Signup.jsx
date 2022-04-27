@@ -11,13 +11,13 @@ const Signup = () => {
 
   // navigate to 'login' page
   const goLogin = () => {
-    navigate('/login', {})
+    navigate('/', {})
   }
 
   // complete form & naviagte to 'login' page with data
   const onFinish = (values) => {
     console.log('Success:', values);
-    navigate('/login', { state: values })
+    navigate('/', { state: values })
   };
 
   // print fail message
