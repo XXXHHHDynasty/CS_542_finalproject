@@ -45,36 +45,6 @@
       "author": "testAuthor",
       "msg": "123",
       "src": "https://joeschmoe.io/api/v1/random",
-      "id": 5,
-      "likes": 0,
-      "dislikes": 0,
-      "discussionId": 57
-    },
-    {
-      "title": "testTitle",
-      "author": "testAuthor",
-      "msg": "3",
-      "src": "https://joeschmoe.io/api/v1/random",
-      "id": 6,
-      "likes": 0,
-      "dislikes": 0,
-      "discussionId": 57
-    },
-    {
-      "title": "testTitle",
-      "author": "testAuthor",
-      "msg": "321",
-      "src": "https://joeschmoe.io/api/v1/random",
-      "id": 7,
-      "likes": 0,
-      "dislikes": 0,
-      "discussionId": 57
-    },
-    {
-      "title": "testTitle",
-      "author": "testAuthor",
-      "msg": "123",
-      "src": "https://joeschmoe.io/api/v1/random",
       "id": 8,
       "likes": 0,
       "dislikes": 0,
@@ -393,12 +363,6 @@
       "subserverId": 14
     },
     {
-      "id": 57,
-      "title": "How to get canteen meals",
-      "description": "some description about food",
-      "subserverId": 14
-    },
-    {
       "id": 58,
       "title": "How to delete canteen meals",
       "description": "some description about food",
@@ -469,12 +433,6 @@
       "title": "football",
       "description": "football is a great game",
       "id": 69
-    },
-    {
-      "subserverId": 14,
-      "title": "How to make a good food",
-      "description": "you need a cookbook",
-      "id": 70
     }
   ]
 }

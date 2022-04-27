@@ -1,24 +1,14 @@
 import { Layout, Avatar, Modal, Menu, Tabs, Empty, Button, Typography, Radio, Input, Form, Select } from 'antd';
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useOutletContext } from "react-router-dom";
-import { UserOutlined, MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
+import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import './UserProfile.css';
 
-const { Content} = Layout;
+const { Content } = Layout;
 const { Option } = Select;
 const { TabPane } = Tabs;
 
 const axios = require('axios').default;
-
-const serverData = ['Server1', 'Server2'];
-const subserverData = {
-    Server1: ['subserver1', 'subserver2', 'subserver3'],
-    Server2: ['subserver4', 'subserver5', 'subserver6'],
-};
-const discussionData = {
-    subserver1: ['discussion1', 'discussion2'],
-    subserver2: ['discussion3', 'discussion4'],
-};
 
 // create server form component
 const CreateServerForm = ({ visible, onCreate, onCancel }) => {
@@ -133,29 +123,27 @@ const CreateServerForm = ({ visible, onCreate, onCancel }) => {
 };
 
 // manager server form component
-const ManagerServerForm = ({ managerVisible, onManager, onCancelManager }) => {
-
+const ManagerServerForm = ({ managerVisible, onManager, servers, onCancelManager }) => {
+    
+    const [subservers, setSubservers] = useState([]);
+    const [discussions, setDiscussions] = useState([]);
     const [managerform] = Form.useForm();
-    const [subservers, setSubservers] = React.useState([]);
-    const [subserver, setSubserver] = React.useState([subserverData[serverData[0]]][0]);
-    const [discussions, setDiscussions] = React.useState([]);
-    const [discussion, setDiscussion] = React.useState([discussionData[subserverData[serverData[0]][0]]][0])
 
     // control server's choice
-    const handleServerChange = value => {
-        setSubservers(subserverData[value]);
-        setSubserver(subserverData[value][0]);
-        setDiscussions([]);
-        setDiscussion('');
+    const handleServerChange = (value) => {
+        axios.get(`http://localhost:3000/servers/${value}?_embed=subservers`).then(res => {
+            setSubservers(res.data.subservers)
+        })
     };
     // control subserver's choice
-    const subserverchange = value => {
-        setDiscussions(discussionData[value]);
-        setDiscussion(discussionData[value][0]);
+    const subserverchange = (value) => {
+        axios.get(`http://localhost:3000/subservers/${value}?_embed=discussions`).then(res => {
+            setDiscussions(res.data.discussions)
+        })
     };
-
-    const discussionchange = value => {
-        setDiscussion(value);
+    // control discussion's choice
+    const discussionchange = (value) => {
+        console.log(value, 'discussion id')
     };
 
     return (
@@ -193,23 +181,23 @@ const ManagerServerForm = ({ managerVisible, onManager, onCancelManager }) => {
                 }}
             >
                 <Form.Item name="delServer" label="Server">
-                    <Select value={serverData[0]} onChange={handleServerChange}>
-                        {serverData.map(server => (
-                            <Option key={server}>{server}</Option>
+                    <Select onChange={handleServerChange}>
+                        {servers.map(server => (
+                            <Option key={server.id}>{server.title}</Option>
                         ))}
                     </Select>
                 </Form.Item>
                 <Form.Item name="delSubserver" label="Subserver" >
-                    <Select value={subserver} onChange={subserverchange}>
+                    <Select onChange={subserverchange}>
                         {subservers.map(subserver => (
-                            <Option key={subserver}>{subserver}</Option>
+                            <Option key={subserver.id}>{subserver.title}</Option>
                         ))}
                     </Select>
                 </Form.Item>
                 <Form.Item name="delDiscussion" label="Discussion" >
-                    <Select value={discussion} onChange={discussionchange}>
+                    <Select onChange={discussionchange}>
                         {discussions.map(discussion => (
-                            <Option key={discussion}>{discussion}</Option>
+                            <Option key={discussion.id}>{discussion.title}</Option>
                         ))}
                     </Select>
                 </Form.Item>
@@ -220,6 +208,7 @@ const ManagerServerForm = ({ managerVisible, onManager, onCancelManager }) => {
 
 const UserInfo = () => {
 
+    const [servers, setServers] = useState([]);
     // use for updating when after creating a new server
     const [status, setStatus] = useOutletContext();
     // control 'create server' button
@@ -230,28 +219,39 @@ const UserInfo = () => {
     // create a new server function 
     const onCreate = (values) => {
         console.log(values)
-        if(values.addsubserver) {
+        if (values.addsubserver) {
             values.addsubserver.unshift(values.subserver)
         }
         axios.post(`http://localhost:3000/servers`, {
             title: values.title
         }).then(res => {
-            for(let key in values.addsubserver) {
+            for (let key in values.addsubserver) {
                 axios.post(`http://localhost:3000/subservers`, {
                     title: values.addsubserver[key],
                     serverId: res.data.id
                 })
             }
         })
-        setStatus(true); 
+        setStatus(true);
         setVisible(false);
     };
 
-    // manage servers
+    // delete discussion
     const onManager = (values) => {
-        console.log('ssss', values);
+        axios.delete(`http://localhost:3000/discussions/${values.delDiscussion}`).then(res => {
+            console.log(res,'delete')
+        })
+        setStatus(true);
         setmanagerVisible(false);
     };
+
+    // get serverdata and send it to 'ManagerServerForm' component
+    const openDeleteServer = () => {
+        setmanagerVisible(true)
+        axios.get(`http://localhost:3000/servers`).then(res => {
+            setServers(res.data)
+        })
+    }
 
     return (
         <Layout className="site-layout" style={{ marginLeft: 200, padding: 20 }}>
@@ -277,12 +277,11 @@ const UserInfo = () => {
                             setVisible(false);
                         }}
                     />
-                    <Button className='flexstyleColumn' type="primary" danger style={{ marginLeft: 10 }} onClick={() => {
-                        setmanagerVisible(true);
-                    }}>Delete Server</Button>
+                    <Button className='flexstyleColumn' type="primary" danger style={{ marginLeft: 10 }} onClick={() => openDeleteServer()}>Delete Discussion</Button>
                     <ManagerServerForm
                         managerVisible={managerVisible}
                         onManager={onManager}
+                        servers={servers}
                         onCancelManager={() => {
                             setmanagerVisible(false);
                         }} />
