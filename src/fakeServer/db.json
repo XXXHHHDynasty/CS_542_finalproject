@@ -1,172 +1,211 @@
 {
   "posts": [
     {
-      "id": 1,
       "title": "json-server",
+      "author": "typicode",
+      "msg": "123",
       "src": "https://joeschmoe.io/api/v1/random",
-      "author": "typicode"
+      "discussionId": 56,
+      "likes": 8,
+      "dislikes": 7,
+      "id": 1
     },
     {
-      "id": 2,
       "title": "json-server",
+      "author": "typicode",
+      "msg": "123",
       "src": "https://joeschmoe.io/api/v1/random",
-      "author": "typicode"
-    },
-    {
-      "title": "testTitle",
-      "author": "testAuthor",
-      "src": "https://joeschmoe.io/api/v1/random",
-      "id": 3
-    },
-    {
-      "title": "testTitle",
-      "author": "testAuthor",
-      "src": "https://joeschmoe.io/api/v1/random",
-      "id": 4
-    },
-    {
-      "title": "testTitle",
-      "author": "testAuthor",
-      "src": "https://joeschmoe.io/api/v1/random",
-      "id": 5
-    },
-    {
-      "title": "testTitle",
-      "author": "testAuthor",
-      "src": "https://joeschmoe.io/api/v1/random",
-      "id": 6
-    },
-    {
-      "title": "testTitle",
-      "author": "testAuthor",
-      "src": "https://joeschmoe.io/api/v1/random",
-      "id": 7
-    },
-    {
-      "title": "testTitle",
-      "author": "testAuthor",
-      "src": "https://joeschmoe.io/api/v1/random",
-      "id": 8
-    },
-    {
-      "title": "testTitle",
-      "author": "testAuthor",
-      "src": "https://joeschmoe.io/api/v1/random",
-      "id": 9
-    },
-    {
-      "title": "testTitle",
-      "author": "testAuthor",
-      "src": "https://joeschmoe.io/api/v1/random",
-      "id": 10
+      "discussionId": 56,
+      "likes": 7,
+      "dislikes": 7,
+      "id": 2
     },
     {
       "title": "testTitle",
       "author": "testAuthor",
       "msg": "123",
-      "id": 11
+      "src": "https://joeschmoe.io/api/v1/random",
+      "discussionId": 56,
+      "likes": 2,
+      "dislikes": 3,
+      "id": 3
     },
     {
       "title": "testTitle",
       "author": "testAuthor",
-      "msg": "",
-      "id": 12
+      "msg": "123",
+      "src": "https://joeschmoe.io/api/v1/random",
+      "discussionId": 56,
+      "likes": 3,
+      "dislikes": 1,
+      "id": 4
+    },
+    {
+      "title": "testTitle",
+      "author": "testAuthor",
+      "msg": "123",
+      "src": "https://joeschmoe.io/api/v1/random",
+      "id": 5,
+      "likes": 0,
+      "dislikes": 0,
+      "discussionId": 57
+    },
+    {
+      "title": "testTitle",
+      "author": "testAuthor",
+      "msg": "3",
+      "src": "https://joeschmoe.io/api/v1/random",
+      "id": 6,
+      "likes": 0,
+      "dislikes": 0,
+      "discussionId": 57
+    },
+    {
+      "title": "testTitle",
+      "author": "testAuthor",
+      "msg": "321",
+      "src": "https://joeschmoe.io/api/v1/random",
+      "id": 7,
+      "likes": 0,
+      "dislikes": 0,
+      "discussionId": 57
+    },
+    {
+      "title": "testTitle",
+      "author": "testAuthor",
+      "msg": "123",
+      "src": "https://joeschmoe.io/api/v1/random",
+      "id": 8,
+      "likes": 0,
+      "dislikes": 0,
+      "discussionId": 58
+    },
+    {
+      "title": "testTitle",
+      "author": "testAuthor",
+      "msg": "123",
+      "src": "https://joeschmoe.io/api/v1/random",
+      "id": 9,
+      "likes": 0,
+      "dislikes": 0,
+      "discussionId": 58
+    },
+    {
+      "title": "testTitle",
+      "author": "testAuthor",
+      "msg": "123",
+      "src": "https://joeschmoe.io/api/v1/random",
+      "id": 10,
+      "likes": 0,
+      "dislikes": 0,
+      "discussionId": 58
+    },
+    {
+      "title": "testTitle",
+      "author": "testAuthor",
+      "msg": "123",
+      "id": 11,
+      "likes": 0,
+      "dislikes": 0,
+      "discussionId": 59
+    },
+    {
+      "title": "testTitle",
+      "author": "testAuthor",
+      "msg": "I",
+      "id": 12,
+      "likes": 0,
+      "dislikes": 0,
+      "discussionId": 60
     },
     {
       "title": "testTitle",
       "author": "testAuthor",
       "msg": "test",
-      "id": 13
+      "id": 13,
+      "likes": 0,
+      "dislikes": 0,
+      "discussionId": 61
     },
     {
       "title": "testTitle",
       "author": "testAuthor",
       "msg": "test 2",
-      "id": 14
+      "id": 14,
+      "likes": 0,
+      "dislikes": 0,
+      "discussionId": 62
     },
     {
       "title": "testTitle",
       "author": "testAuthor",
       "msg": "test",
-      "id": 15
+      "id": 15,
+      "likes": 0,
+      "dislikes": 0,
+      "discussionId": 63
     },
     {
       "title": "testTitle",
       "author": "testAuthor",
       "msg": "hi",
-      "id": 16
+      "id": 16,
+      "likes": 0,
+      "dislikes": 0,
+      "discussionId": 64
     },
     {
       "title": "testTitle",
       "author": "testAuthor",
       "msg": "Hi there! This is to test subserver1",
-      "id": 17
+      "id": 17,
+      "likes": 0,
+      "dislikes": 0,
+      "discussionId": 65
     },
     {
       "title": "testTitle",
       "author": "testAuthor",
-      "msg": "",
-      "id": 18
+      "msg": "1",
+      "id": 18,
+      "likes": 0,
+      "dislikes": 0,
+      "discussionId": 66
     },
     {
       "title": "testTitle",
       "author": "testAuthor",
-      "msg": "",
-      "id": 19
+      "msg": "2",
+      "id": 19,
+      "dislikes": 0,
+      "discussionId": 67
     },
     {
       "title": "testTitle",
       "author": "testAuthor",
       "msg": "test post",
-      "id": 20
+      "id": 20,
+      "likes": 0,
+      "dislikes": 0,
+      "discussionId": 68
     },
     {
       "title": "testTitle",
       "author": "testAuthor",
       "msg": "test post",
-      "id": 21
+      "id": 21,
+      "likes": 0,
+      "dislikes": 0,
+      "discussionId": 69
     },
     {
       "title": "testTitle",
       "author": "testAuthor",
       "msg": "",
-      "id": 22
-    },
-    {
-      "title": "testTitle",
-      "author": "testAuthor",
-      "msg": "test",
-      "id": 23
-    },
-    {
-      "title": "testTitle",
-      "author": "testAuthor",
-      "msg": "test",
-      "id": 24
-    },
-    {
-      "title": "testTitle",
-      "author": "testAuthor",
-      "msg": "this is a test post",
-      "id": 25
-    },
-    {
-      "title": "testTitle",
-      "author": "testAuthor",
-      "msg": "test",
-      "id": 26
-    },
-    {
-      "title": "testTitle",
-      "author": "testAuthor",
-      "msg": "test",
-      "id": 27
-    },
-    {
-      "title": "testTitle",
-      "author": "testAuthor",
-      "msg": "test",
-      "id": 28
+      "id": 22,
+      "likes": 0,
+      "dislikes": 0,
+      "discussionId": 69
     }
   ],
   "comments": [

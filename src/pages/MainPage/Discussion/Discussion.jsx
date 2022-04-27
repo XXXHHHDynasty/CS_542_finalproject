@@ -77,7 +77,6 @@ const Discussion = () => {
 
     // add a new discussion function 
     const onCreate = (values) => {
-        console.log('yiyayiyao', values);
         axios.post(`http://localhost:3000/discussions`, {
             subserverId: parseInt(location.state.subserverId),
             title: values.title,
@@ -127,7 +126,7 @@ const Discussion = () => {
                                 }}>{item.title}</Link>}
                                 description={item.description}
                                 onClick={() => {
-                                    navigate("/home", { state: { title: item.title } })
+                                    navigate("/home", { state: { title: item.title, id: item.id } })
                                 }}
                             />
                         </List.Item>
