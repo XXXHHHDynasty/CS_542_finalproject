@@ -49,7 +49,6 @@ const Home = () => {
         })
     };
     const SaveComment = (item) => {
-        console.log(item)
         axios.post(`http://localhost:3000/savedComments`, {
             title: item.title,
             author: item.author,
@@ -57,7 +56,8 @@ const Home = () => {
             src: item.src,
             discussionId: item.discussionId,
             likes: item.likes,
-            dislikes: item.dislikes
+            dislikes: item.dislikes,
+            savedCommentId: item.id
         })
     }
     const loadData = () => {

@@ -445,6 +445,7 @@
       "discussionId": 56,
       "likes": 8,
       "dislikes": 7,
+      "savedCommentId": 1,
       "id": 1
     },
     {
@@ -455,6 +456,7 @@
       "discussionId": 56,
       "likes": 7,
       "dislikes": 8,
+      "savedCommentId": 2,
       "id": 2
     },
     {
@@ -465,50 +467,41 @@
       "discussionId": 56,
       "likes": 2,
       "dislikes": 3,
+      "savedCommentId": 3,
       "id": 3
     },
     {
       "title": "testTitle",
       "author": "testAuthor",
-      "msg": "123",
-      "src": "https://joeschmoe.io/api/v1/random",
-      "discussionId": 56,
-      "likes": 3,
-      "dislikes": 1,
-      "id": 4
-    },
-    {
-      "title": "testTitle",
-      "author": "testAuthor",
-      "msg": "123",
-      "src": "https://joeschmoe.io/api/v1/random",
-      "discussionId": 56,
-      "likes": 3,
-      "dislikes": 1,
-      "id": 5
-    },
-    {
-      "title": "testTitle",
-      "author": "testAuthor",
-      "msg": "123",
-      "discussionId": 59,
+      "msg": "I",
+      "discussionId": 60,
       "likes": 0,
       "dislikes": 0,
-      "id": 6
+      "savedCommentId": 12,
+      "id": 4
     }
   ],
   "savedDiscussions": [
     {
-      "subserverId": 14,
-      "title": "How to improve canteen meals",
+      "subserverId": 18,
+      "title": "What to get canteen meals",
       "description": "some description about food",
+      "savedDiscussionId": 60,
       "id": 1
     },
     {
-      "subserverId": 19,
-      "title": "Where to improve canteen meals",
+      "subserverId": 18,
+      "title": "What to delete canteen meals",
       "description": "some description about food",
+      "savedDiscussionId": 61,
       "id": 2
+    },
+    {
+      "subserverId": 14,
+      "title": "How to improve canteen meals",
+      "description": "some description about food",
+      "savedDiscussionId": 56,
+      "id": 3
     }
   ]
 }

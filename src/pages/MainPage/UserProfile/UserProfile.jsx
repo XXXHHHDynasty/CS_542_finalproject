@@ -315,11 +315,11 @@ const UserInfo = () => {
                                             avatar={<Avatar src={item.src} />}
                                             title={<Link to={{
                                                 pathname: "/home",
-                                                state: { discussionId: item.id }
+                                                state: { title: item.title, id: item.savedDiscussionId }
                                             }}>{item.title}</Link>}
                                             description={item.description}
                                             onClick={() => {
-                                                navigate("/home", { state: { title: item.title, id: item.id } })
+                                                navigate("/home", { state: { title: item.title, id: item.savedDiscussionId } })
                                             }}
                                         />
                                     </List.Item>

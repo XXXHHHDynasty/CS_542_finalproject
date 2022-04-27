@@ -94,7 +94,8 @@ const Discussion = () => {
         axios.post(`http://localhost:3000/savedDiscussions`, {
             subserverId: values.subserverId,
             title: values.title,
-            description: values.description
+            description: values.description,
+            savedDiscussionId: values.id
         }) 
     }
 
