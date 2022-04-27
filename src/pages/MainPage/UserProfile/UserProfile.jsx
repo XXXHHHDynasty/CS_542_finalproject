@@ -291,8 +291,6 @@ const UserInfo = () => {
                         <Typography.Title editable={{ onChange: setName }} level={3} style={{ margin: 0, color: '#333' }}>
                             {name}
                         </Typography.Title>
-                        <p style={{ marginBottom: 0, color: '#666' }}>Follow:100</p>
-                        <p style={{ marginBottom: 0, color: '#666' }}>Follower:100</p>
                     </div>
                 </div>
                 <div className="flexstyleforbutton" style={{ marginRight: 20 }}>
