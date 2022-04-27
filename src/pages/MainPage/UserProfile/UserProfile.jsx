@@ -26,8 +26,10 @@ const CreateServerForm = ({ visible, onCreate, onCancel }) => {
                 form
                     .validateFields()
                     .then((values) => {
-                        form.resetFields();
-                        onCreate(values);
+                        onCreate(values)
+                    })
+                    .then(() =>{
+                        form.setFieldsValue({title:'',description:'', addsubserver:[], subserver:''})
                     })
                     .catch((info) => {
                         console.log('Validate Failed:', info);
@@ -232,21 +234,35 @@ const UserInfo = () => {
             setSavedComments(res.data)
         })
     }, []);
+
     // create a new server function 
     const onCreate = (values) => {
         if (values.addsubserver) {
+            console.log(values,'alldata')
             values.addsubserver.unshift(values.subserver)
-        }
-        axios.post(`http://localhost:3000/servers`, {
-            title: values.title
-        }).then(res => {
-            for (let key in values.addsubserver) {
+            console.log(values.addsubserver,'subserver')
+            axios.post(`http://localhost:3000/servers`, {
+                title: values.title
+            }).then(res => {
+                console.log(res, 'fanhuileshenmene')
+                for (let key in values.addsubserver) {
+                    axios.post(`http://localhost:3000/subservers`, {
+                        title: values.addsubserver[key],
+                        serverId: res.data.id
+                    })
+                }
+            })
+        } else {
+            axios.post(`http://localhost:3000/servers`, {
+                title: values.title
+            }).then(res => {
+                console.log(res, 'fanhuileshenmene')
                 axios.post(`http://localhost:3000/subservers`, {
-                    title: values.addsubserver[key],
+                    title: values.subserver,
                     serverId: res.data.id
                 })
-            }
-        })
+            })
+        }
         setStatus(true);
         setVisible(false);
     };
@@ -303,7 +319,7 @@ const UserInfo = () => {
             <Content style={{ margin: '24px 16px 0', overflow: 'initial', backgroundColor: '#FFF' }}>
                 <Tabs defaultActiveKey="1" style={{ padding: '20px 20px 0 20px' }}>
                     <TabPane tab="Saved Discusstions" key="1">
-                        <div className='commentsShow' style={{background: 'white'}}>
+                        <div className='commentsShow' style={{ background: 'white' }}>
                             <List
                                 style={{ backgroundColor: 'white', borderRadius: 5 }}
                                 bordered
